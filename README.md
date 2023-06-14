@@ -92,7 +92,7 @@ cd server
 ```
 For the frontend: 
 ```shell 
-cd server
+cd client
 ```
 
 2. Run the test script as follows: 
