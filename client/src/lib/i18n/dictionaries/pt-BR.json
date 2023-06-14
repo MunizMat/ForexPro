@@ -1,0 +1,120 @@
+{
+    "home": {
+      "title": "ForexPro",
+      "subtitle": "Potencialize sua jornada de negociação de moeda estrangeira com dados em tempo real e uma experiência de usuário perfeita",
+      "buttonText": "Comece a negociar hoje"
+    },
+    "navbar": {
+        "logout": "Sair",
+        "signup": "Criar conta",
+        "login": "Entrar",
+        "brandName": "ForexPro"
+    },
+    "formLabels": {
+        "name": "Nome",
+        "email": "Email",
+        "password": "Senha",
+        "confirmPassword": "Confirmar senha"
+    },
+    "signup": {
+        "title": "Cadastre-se gratuitamente",
+        "alreadyHaveAccount": "Já possui uma conta?",
+        "clickHere": "Clique aqui",
+        "toLogin": "para fazer login",
+        "passwordRequirements": "A senha deve conter:",
+        "passwordRequirements1": "- Entre 6 e 20 caracteres",
+        "passwordRequirements2": "- Letra maiúscula",
+        "passwordRequirements3": "- Números",
+        "buttonText": "Criar conta"
+    },
+    "login": {
+        "title": "Faça login na sua conta",
+        "dontHaveAccount": "Ainda não possui uma conta?",
+        "clickHere": "Clique aqui",
+        "toCreateAccount": "para criar uma",
+        "buttonText": "Entrar"
+    },
+    "dashboard": {
+        "header":  {
+            "accountBalance": "Saldo em conta:",
+            "currencyPair": "Par de Moedas",
+            "tradeHistory": "Histórico de Transações"
+        },
+        "trade": {
+            "updatedAt": "Atualizado em:",
+            "amountPlaceholder": "Quantidade",
+            "baseCurrency": "Moeda Base",
+            "buy": "Comprar",
+            "sell": "Vender"
+        }
+    },
+    "tradeHistory": {
+        "title": "Histórico de Transações",
+        "timestamp": "Data e Hora",
+        "currencyPair": "Par de Moedas",
+        "baseCurrency": "Moeda Base",
+        "type": "Tipo",
+        "exchangeRate": "Taxa de Câmbio",
+        "amount": "Quantidade"
+    },
+    "validations": {
+        "name": "Por favor, insira seu nome",
+        "email": {
+          "required": "Por favor, insira seu endereço de e-mail",
+          "invalid": "Por favor, insira um endereço de e-mail válido"
+        },
+        "password": {
+            "required":"Por favor, insira sua senha",
+            "tooShort": "A senha deve ter ao menos 6 caracteres",
+            "tooLong": "A senha não pode ter mais de 30 caracteres",
+            "invalid": "A senha deve conter ao menos uma letra maiúscula e um número"
+        },
+        "passwordConfirmation": {
+            "required": "Por favor, confirme sua senha",
+            "notMatching": "As senhas não correspondem"
+        },
+        "trade": {
+            "amount": "A quantidade mínima para negociação é de 10 unidades monetárias",
+            "accountBalance": "Saldo insuficiente em conta",
+            "required": "Por favor insira um valor para transação"
+        }
+    },
+    "toasts": {
+        "success": {
+          "trade": "Transação realizada",
+          "signup": "Conta criada com sucesso!",
+          "login": "Login realizado!",
+          "tradeProcessing": "Sua transação está sendo processada. Logo receberá confirmação!"
+        },
+        "pending": {
+          "trade": "Processando sua transação...",
+          "signup": "Criando sua conta...",
+          "login": "Efetuando login..."
+        },
+        "error": {
+          "invalidTradeAmount": "Por favor, insira uma quantidade válida",
+          "trade": "Ocorreu um erro ao processar sua transação"
+        }
+      },
+    "apiErrors": {
+        "axiosNetwork": "Servidor indisponível, pedimos desculpas pelo inconveniente. Por favor, tente novamente mais tarde ou entre em contato com o suporte para obter assistência.",
+        "default": "Ocorreu um erro ao processar sua solicitação. Pedimos desculpas",
+        "accountAlreadyExists": "Conta já existe",
+        "wrongPassword": "Senha incorreta",
+        "requestProcessing": "Ocorreu um erro ao processar sua solicitação",
+        "zodValidation": "Ocorreu um erro ao validar suas informações",
+        "userDoesntExist": "Usuário não existe",
+        "failToGetUserData": "Falha ao recuperar os dados do usuário",
+        "loginRequired": "Login necessário",
+        "unauthorized": "Token inválido ou expirado"
+    },
+    "other":{
+        "timezone": "Horário de Brasília",
+        "tradeType": {
+            "Buy": "Compra",
+            "Sell": "Venda"
+        }
+    }
+    
+}
+  

@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: white;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, black, rgb(78, 78, 78));
+  background-size: contain;
+  background-repeat: no-repeat;  
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer img {
+  margin-left: 0.5rem;
+}
+
+footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code {
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.navbar-toggler, .navbar-brand, .nav-link {
+  color: white;
+}
+
+.nav-link {
+  text-align: center;
+}
+
+.fi {
+  width: 200px;
+}
+
+.navbar-toggler {
+  border: 1px solid white;
+}
+
+.fade {
+  transition: opacity 1s ease-in-out;
+}
+
+.dashboard-image {
+  max-height: 300px;
+}
+.loader {
+  height: 10rem;
+  width: 10rem;
+}
+
+.binance-img {
+  background-image: url('../public/images/binance.jpg');
+  background-size: cover;
+}
+
+.root {
+  min-height: 80vh;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 32px;
+  right: 30px;
+  cursor: pointer;
+}
+.password-toggle-parent {
+  position: relative;
+}
+
+.dashboard{
+  color: white;
+  border-radius: 10px;
+  max-width: 1000px;
+  padding: 0 50px;
+}
+
+.dashboard-image {
+  max-height: 300px;
+}
+
+#trade-history {
+  width: 100%;
+  margin: 100px 0;
+  max-width: none;
+  padding: 3rem;
+}
+
+
