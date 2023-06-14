@@ -6,6 +6,7 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 - [Technologies](#technologies)
 - [Features](#features)
 - [Getting Started](#getting-started)
+- [Testing](#testing)
 
 ## Getting Started
 
@@ -78,3 +79,32 @@ docker compose up
 - Queue system for handling the trades
 - Dashboard for mock trading
 - Trade History
+
+## Testing 
+
+To run the application's unit tests follow these steps: 
+
+1. Select the service (frontend/backend) you would like to test first, and navigate to it's directory:
+
+For the backend: 
+```shell 
+cd server
+```
+For the frontend: 
+```shell 
+cd server
+```
+
+2. Run the test script as follows: 
+```shell 
+npm test
+```
+
+For code coverage reports you can use the following script:
+```shell 
+npm run test:coverage
+```
+
+
+
+
