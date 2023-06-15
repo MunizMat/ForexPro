@@ -8,13 +8,15 @@ import Trade from './Trade';
 interface Props {
   locale: Locale;
   dict: IDictionary;
+  baseCurrency: string;
+  currencyPair: string;
 }
 
-function Dashboard({ locale, dict }: Props) {
+function Dashboard({ locale, dict, baseCurrency, currencyPair }: Props) {
   return (
     <div className="col">
       <div className="row p-3">
-        <Header locale={locale} currencyPair="GBPUSD" dict={dict} />
+        <Header locale={locale} currencyPair={currencyPair} dict={dict} />
       </div>
       <div className="row p-3">
         <Image
@@ -27,8 +29,8 @@ function Dashboard({ locale, dict }: Props) {
         <Trade
           locale={locale}
           dict={dict}
-          baseCurrency="GBP"
-          currencyPair="GBPUSD"
+          baseCurrency={baseCurrency}
+          currencyPair={currencyPair}
         />
       </div>
     </div>

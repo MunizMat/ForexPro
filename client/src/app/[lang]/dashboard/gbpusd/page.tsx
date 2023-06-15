@@ -10,5 +10,12 @@ interface Props {
 
 export default async function Page({ params }: Props) {
   const dict = await getDictionary(params.lang);
-  return <Dashboard dict={dict} locale={params.lang} />;
+  return (
+    <Dashboard
+      dict={dict}
+      locale={params.lang}
+      currencyPair="GBPUSD"
+      baseCurrency="GBP"
+    />
+  );
 }

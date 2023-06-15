@@ -37,10 +37,7 @@ export const AuthProvider: FC<Props> = ({ children, locale, dict }) => {
   const logout = () => {
     router.push(`/${locale}`);
 
-    setTimeout(() => {
-      // Temporary bug fix when user logs out
-      setAuthState({ isAuthenticated: false, user: null, token: null });
-    }, 750);
+    setAuthState({ isAuthenticated: false, user: null, token: null });
   };
 
   const signup = async (userData: IUserCreation) => {

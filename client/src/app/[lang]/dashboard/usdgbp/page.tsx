@@ -1,4 +1,4 @@
-import Trade from 'src/lib/components/dashboard/Trade';
+import Dashboard from 'src/lib/components/dashboard';
 import { Locale } from 'src/lib/i18n/config';
 import { getDictionary } from 'src/lib/i18n/getDictionary';
 
@@ -11,11 +11,11 @@ interface Props {
 export default async function Page({ params }: Props) {
   const dict = await getDictionary(params.lang);
   return (
-    <Trade
-      locale={params.lang}
+    <Dashboard
       dict={dict}
-      baseCurrency="USD"
+      locale={params.lang}
       currencyPair="USDGBP"
+      baseCurrency="USD"
     />
   );
 }
