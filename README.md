@@ -7,8 +7,6 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 - [Getting Started](#getting-started)
 - [Features](#features)
 - [Testing](#testing)
-- - [Using Docker]
-- - [Using Node.js]
 
 ## Getting Started
 
@@ -154,7 +152,10 @@ npm run dev
 - Trade History
 
 ## Testing 
+- [Using Node.js](#using-nodejs-1)
+- [Using Docker](#using-docker-1)
 
+## Using Node.js
 To run the application's unit tests follow these steps: 
 
 1. Select the service (frontend/backend) you would like to test first, and navigate to it's directory:
@@ -178,6 +179,13 @@ For code coverage reports you can use the following script:
 npm run test:coverage
 ```
 
+## Using Docker
+In the root directory of the project, run the following commands:
+
+```shell 
+docker-compose -f docker-compose.test.yml build
+docker-compose -f docker-compose.test.yml up
+```
 
 
 
