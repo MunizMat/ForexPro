@@ -1,0 +1,33 @@
+{
+    "root": true,
+    "env": {
+      "node": true,
+      "browser": true,
+      "es6": true 
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:prettier/recommended"
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 11,
+      "sourceType": "module"
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["testing-library", "@typescript-eslint"],
+    "overrides": [
+      // Only uses Testing Library lint rules in test files
+      {
+        "files": [
+          "**/__tests__/**/*.[jt]s?(x)",
+          "**/?(*.)+(spec|test).[jt]s?(x)"
+        ],
+        "extends": ["plugin:testing-library/react"]
+      }
+    ]
+  }

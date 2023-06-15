@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import getValidationErrors from '../utils/getValidationErrors';
 import { IDictionary } from '../interfaces/IDictionary';
-import { ZodObject, ZodRawShape, ZodTypeAny } from 'zod';
+import { ZodEffects, ZodObject, ZodTypeAny } from 'zod';
 
-export default function useFormValidation<TFormData extends ZodRawShape>(
+export default function useFormValidation<TFormData>(
   dict: IDictionary,
   zodSchemaGetter: (
     // eslint-disable-next-line
     dict: IDictionary
-  ) => ZodObject<Record<keyof TFormData, ZodTypeAny>>
+  ) =>
+    | ZodObject<Record<keyof TFormData, ZodTypeAny>>
+    | ZodEffects<ZodObject<Record<keyof TFormData, ZodTypeAny>>>
 ) {
   const [errors, setErrors] = useState<Partial<TFormData>>({});
 
