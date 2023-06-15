@@ -8,7 +8,7 @@
     "test:coverage": "npm test -- --coverage --collectCoverageFrom='./src/**'",
     "start": "node dist/index.js",
     "generate:prisma": "npx prisma migrate dev --name conatinerize",
-    "start:dev": "nodemon index.ts",
+    "dev": "nodemon index.ts",
     "build": "tsup src"
   },
   "keywords": [],

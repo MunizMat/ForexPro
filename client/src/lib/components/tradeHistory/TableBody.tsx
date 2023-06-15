@@ -3,7 +3,6 @@ import { AuthContext } from 'src/lib/contexts/AuthContext';
 import { Locale } from 'src/lib/i18n/config';
 import { IDictionary } from 'src/lib/interfaces/IDictionary';
 import TradeHistory from 'src/lib/utils/TradeHistory';
-import Loader from '../others/Loader';
 
 interface Props {
   locale: Locale;
@@ -32,7 +31,6 @@ export default function TableBody({ locale, dict }: Props) {
             <td>{trade.amount}</td>
           </tr>
         ))}
-      {!formattedTrades && <Loader />}
     </tbody>
   );
 }

@@ -19,9 +19,7 @@ export default class CurrencyServices {
   static async init() {
     const accountId = process.env.META_API_ACCOUNT_ID ?? '';
     const token = process.env.META_API_TOKEN ?? '';
-    console.log('unconnected');
     const connection = await this.getMetaApiConnection(accountId, token);
-    console.log('connected');
     return new CurrencyServices(connection, accountId, token);
   }
 
@@ -38,7 +36,6 @@ export default class CurrencyServices {
 
   getRates(currencyPair: string) {
     const terminalState = this.connection.terminalState;
-    console.log(terminalState.price(currencyPair));
 
     const { ask, bid, time, symbol } = terminalState.price(currencyPair);
     return {

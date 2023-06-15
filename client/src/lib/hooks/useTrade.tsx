@@ -13,10 +13,11 @@ const useTrade = (currencyPair: string, dict: IDictionary) => {
   };
   const [amount, setAmount] = useState('');
 
-  const handleTrade = async (
-    tradeData: Omit<ITradeCreation, 'amount'>,
-    accountBalance: number
-  ) => {
+  const handleTrade = async (tradeData: Omit<ITradeCreation, 'amount'>) => {
+    const accountBalance =
+      tradeData.baseCurrency === 'GBP'
+        ? user.accountBalanceGBP
+        : user.accountBalanceUSD;
     const canProceedWithTrade = validateTrade(amount, accountBalance, dict);
     if (!canProceedWithTrade) return;
 

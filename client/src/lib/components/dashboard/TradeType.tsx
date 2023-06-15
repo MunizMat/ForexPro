@@ -1,8 +1,5 @@
-import React, { useContext } from 'react';
 import { Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { TradeTypeProps } from '../../interfaces/props/TradeTypeProps';
-import { AuthContext } from '../../contexts/AuthContext';
-import { IUser } from '../../interfaces/IUser';
 import formatDate from '../../utils/formatDate';
 import useTrade from '../../hooks/useTrade';
 
@@ -14,11 +11,7 @@ const TradeType: React.FC<TradeTypeProps> = ({
   const { baseCurrency, exchangeRate, tradeType, currencyPair } = tradeData;
   const { dict, locale } = i18nData;
 
-  const { user } = useContext(AuthContext).authState as { user: IUser };
   const { handleTrade, setAmount } = useTrade(currencyPair, dict);
-
-  const accountBalance =
-    baseCurrency === 'GBP' ? user.accountBalanceGBP : user.accountBalanceUSD;
 
   const getButtonColor = () => {
     return tradeType === 'Buy' ? 'success' : 'danger';
@@ -52,7 +45,7 @@ const TradeType: React.FC<TradeTypeProps> = ({
           <InputGroup.Text>{baseCurrency}</InputGroup.Text>
         </InputGroup>
         <Button
-          onClick={() => handleTrade(tradeData, accountBalance)}
+          onClick={() => handleTrade(tradeData)}
           className="w-100 mt-4"
           size="lg"
           variant={getButtonColor()}

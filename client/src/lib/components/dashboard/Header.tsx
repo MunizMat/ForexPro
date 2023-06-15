@@ -12,14 +12,14 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 function AccountBalance() {
   const { user } = useContext(AuthContext).authState;
-  return (
+  return user ? (
     <Navbar.Text>
-      {user &&
-        `Account balance: £ ${user.accountBalanceGBP.toFixed(
-          2
-        )} | $ ${user.accountBalanceUSD.toFixed(2)}`}
-      {!user && <Placeholder />}
+      {`Account balance: £ ${user.accountBalanceGBP.toFixed(
+        2
+      )} | $ ${user.accountBalanceUSD.toFixed(2)}`}
     </Navbar.Text>
+  ) : (
+    <Placeholder bg="primary" as={Navbar.Text} animation="wave" />
   );
 }
 
