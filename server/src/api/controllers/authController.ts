@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import AuthService from '../services/authServices';
+import { ApiError } from '../helpers/ApiErrors';
 
 class AuthController {
-  static async login(req: Request, res: Response, next: NextFunction) {
+  static async login(req: Request, res: Response) {
     const { email, password } = req.body;
 
     try {
@@ -10,7 +11,10 @@ class AuthController {
 
       return res.status(200).json({ user, token });
     } catch (error) {
-      next(error);
+      const { statusCode, translationReference } = error as ApiError;
+      return res.status(statusCode).json({
+        errorTranslationMessage: translationReference,
+      });
     }
   }
 }

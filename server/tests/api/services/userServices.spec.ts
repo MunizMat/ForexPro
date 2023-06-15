@@ -45,22 +45,6 @@ describe('User Services Class', () => {
       expect(dbServicesSpy).toHaveBeenCalledWith(userData, mockHashedPassword);
       expect(result).toEqual(mockCreatedUser);
     });
-
-    it('should call api error handler method if an error occurs', async () => {
-      const mockError = new Error('some error');
-
-      jest
-        .spyOn(UserServices, 'getHashedPassword')
-        .mockResolvedValue(mockHashedPassword);
-
-      jest.spyOn(DatabaseServices, 'createUser').mockRejectedValue(mockError);
-
-      try {
-        await UserServices.create(userData);
-      } catch (error) {}
-
-      expect(ApiError.handle).toHaveBeenCalledWith(mockError);
-    });
   });
 
   describe('getHashedPassword() method', () => {

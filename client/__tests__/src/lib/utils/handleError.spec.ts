@@ -4,7 +4,7 @@ import { handleError } from '../../../../src/lib/utils/handleError';
 describe('handleError utility function', () => {
   it('should handle an AxiosError that has a translation reference', () => {
     const mockResponse = {
-      data: { errorTranslationReference: 'loginRequired' },
+      data: { errorTranslationMessage: 'loginRequired' },
     } as AxiosResponse;
     const mockError = new AxiosError('', '', undefined, '', mockResponse);
 

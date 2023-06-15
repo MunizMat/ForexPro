@@ -6,7 +6,7 @@ const errorHandler = (
   req: Request,
   res: Response,
 ) => {
-  const statusCode = error.statusCode ?? 501;
+  const statusCode = error.statusCode ?? 500;
   const errorTranslationReference = error.translationReference
     ? error.translationReference
     : 'default';

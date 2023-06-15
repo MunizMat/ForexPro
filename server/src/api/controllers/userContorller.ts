@@ -8,7 +8,7 @@ import { TradeCreationRequest } from '../types/TradeCreationRequest';
 import { ApiError } from '../helpers/ApiErrors';
 
 export default class UserController {
-  static async create(req: Request, res: Response, next: NextFunction) {
+  static async create(req: Request, res: Response) {
     try {
       const validatedUser: IAccountCreation =
         UserHelpers.validateForAccountCreation(req.body);
@@ -21,8 +21,9 @@ export default class UserController {
         },
       });
     } catch (error) {
-      return res.status((error as ApiError).statusCode).json({
-        errorTranslationMessage: (error as ApiError).translationReference,
+      const { statusCode, translationReference } = error as ApiError;
+      return res.status(statusCode).json({
+        errorTranslationMessage: translationReference,
       });
     }
   }

@@ -5,6 +5,7 @@ import { User } from '@prisma/client';
 import { tradeQueue } from '../../../src/api/queues/trade';
 import { Job } from 'bullmq';
 import UserController from '../../../src/api/controllers/userContorller';
+import { ApiError } from '../../../src/api/helpers/ApiErrors';
 
 jest.mock('../../../src/api/helpers/UserHelper');
 jest.mock('../../../src/api/services/userServices');
@@ -38,7 +39,7 @@ describe('User Controller Class', () => {
     it('should call validation helper with correct argument', async () => {
       jest.spyOn(UserHelpers, 'validateForAccountCreation');
 
-      await UserController.create(req, res, next);
+      await UserController.create(req, res);
 
       expect(UserHelpers.validateForAccountCreation).toHaveBeenCalledWith(
         req.body,
@@ -53,7 +54,7 @@ describe('User Controller Class', () => {
         .spyOn(UserHelpers, 'validateForAccountCreation')
         .mockReturnValue(mockValidatedUser);
 
-      await UserController.create(req, res, next);
+      await UserController.create(req, res);
 
       expect(UserServices.create).toHaveBeenCalledWith(mockValidatedUser);
     });
@@ -74,7 +75,7 @@ describe('User Controller Class', () => {
         .mockReturnValue(mockValidatedUser);
       jest.spyOn(UserServices, 'create').mockResolvedValue(mockUser);
 
-      await UserController.create(req, res, next);
+      await UserController.create(req, res);
 
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith({
@@ -92,11 +93,14 @@ describe('User Controller Class', () => {
     it('should call next() w/error if an error occurs during creation', async () => {
       jest
         .spyOn(UserServices, 'create')
-        .mockRejectedValue(new Error('some error'));
+        .mockRejectedValue(new ApiError('unauthorized', 500));
 
-      await UserController.create(req, res, next);
+      await UserController.create(req, res);
 
-      expect(next).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({
+        errorTranslationMessage: 'unauthorized',
+      });
     });
   });
 

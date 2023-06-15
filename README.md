@@ -4,18 +4,21 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 
 ## Table of Contents
 - [Technologies](#technologies)
-- [Features](#features)
 - [Getting Started](#getting-started)
+- [Features](#features)
 - [Testing](#testing)
 
 ## Getting Started
 
 ### Prerequisites
 To install the project on your local machine you will need to:
-1. Visit [Docker's website](https://www.docker.com/) and install Docker on your local machine
+1. Install [Docker](https://www.docker.com/) or [Node.js](https://nodejs.org/en) on your local machine (installation using Node requires Redis and PostgreSQL installed locally)
 2. Visit [MetaApi](https://metaapi.cloud/) and create an account. After creating your account, navigate to 'API Access' and generate an API access token for free.
 
+ps: Docker is the recommended way to install the project locally. Installation using node will require you to have Redis and PostgreSQL setup and installed on your local machine
+
 ### Installation
+#### Using Docker
 1. Clone this repository to your local machine:
 ```shell 
 git clone https://github.com/MunizMat/ForexPro.git
@@ -58,6 +61,68 @@ docker compose build
 docker compose up
 ```
 
+#### Using Node.js
+1. Clone this repository to your local machine:
+```shell 
+git clone https://github.com/MunizMat/ForexPro.git
+```
+
+2. Navigate to the 'server' directory:
+```shell 
+cd ForexPro/server
+```
+
+3. Create a .env file:
+```shell 
+nano .env
+```
+
+Paste the following: 
+
+```shell 
+PORT=3000
+DATABASE_URL="postgresql://{YOUR_POSTGRES_USER}:{YOUR_POSTGRES_PASSWORD}@localhost:5432/forex-pro?schema=public"
+REDIS_HOST="127.0.0.1"
+REDIS_PORT=6379
+JWT_SECRET_KEY={YOUR_JWT_SECRET_KEY}
+META_API_TOKEN={YOUR_META_API_TOKEN}
+META_API_ACCOUNT_ID={YOUR_META_API_ACCOUNT_ID}
+```
+
+4. Install the dependencies for the 'server' directory:
+```shell 
+npm install
+```
+ 
+5. Install the dependencies for the 'client' directory:
+```shell 
+cd ../client
+npm install
+```
+
+6. Setup the database migrations using Prisma:
+```shell 
+cd ../server
+npx prisma generate
+npx prisma migrate dev --name init
+```
+
+7. On a separate Terminal window, run Redis:
+```shell 
+redis-server
+```
+
+. Run the backend: 
+```shell 
+npm run start
+```
+8. On a separate Teminal window, run the frontend: 
+```shell 
+cd client
+npm run dev
+```
+
+
 
 
 ## Technologies
@@ -70,6 +135,7 @@ docker compose up
 - Socket.io
 - Zod
 - BullMQ
+- Redis
 - [MetaApi](https://metaapi.cloud/sdks)
 - Jest
 

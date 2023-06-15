@@ -28,7 +28,7 @@ describe('useSocket hook', () => {
   it('should call socket listeners', () => {
     renderHook(() => useSocket('GBPUSD', mockDict));
 
-    expect(io).toHaveBeenCalledWith('http://localhost:3000');
+    expect(io).toHaveBeenCalledWith('http://localhost:3001');
 
     expect(mockSocketIo().emit).toHaveBeenCalledWith('userId', 1);
     expect(mockSocketIo().on).toHaveBeenNthCalledWith(

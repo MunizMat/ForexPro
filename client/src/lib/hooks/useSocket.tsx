@@ -19,7 +19,7 @@ export const useSocket = (currencyPair: string, dict: IDictionary) => {
   const { setAuthState, authState } = useContext(AuthContext);
 
   useEffect(() => {
-    const socket = io('http://localhost:3001');
+    const socket = io('http://localhost:3000');
     const user = authState.user as IUser;
 
     socket.on('connect', () => {
