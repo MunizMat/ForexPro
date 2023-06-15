@@ -1,11 +1,10 @@
 'use client';
-import React, { FC, useContext } from 'react';
-import { Container } from 'react-bootstrap';
-import TradeHistoryTable from './Table';
-import { AuthContext } from '../../contexts/AuthContext';
-import { IUser } from 'src/lib/interfaces/IUser';
+import React, { FC } from 'react';
+import { Container, Table } from 'react-bootstrap';
 import { IDictionary } from '../../interfaces/IDictionary';
 import { Locale } from '../../i18n/config';
+import TableHeaders from './TableHeaders';
+import TableBody from './TableBody';
 
 interface Props {
   dict: IDictionary;
@@ -13,8 +12,6 @@ interface Props {
 }
 
 const TradeHistory: FC<Props> = ({ dict, locale }) => {
-  const { user } = useContext(AuthContext).authState as { user: IUser };
-
   return (
     <Container
       id="trade-history"
@@ -23,7 +20,10 @@ const TradeHistory: FC<Props> = ({ dict, locale }) => {
     >
       <h1 className="mb-5 text-white">{dict.tradeHistory.title}</h1>
 
-      <TradeHistoryTable locale={locale} trades={user.trades} dict={dict} />
+      <Table className="text-white" variant="dark" hover>
+        <TableHeaders {...dict.tradeHistory} />
+        <TableBody locale={locale} dict={dict} />
+      </Table>
     </Container>
   );
 };

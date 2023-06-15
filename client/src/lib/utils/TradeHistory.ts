@@ -1,5 +1,5 @@
 import { Locale } from '../i18n/config';
-import { IDictionary } from '../interfaces/IDictionary';
+import { IDictionary, TradeType } from '../interfaces/IDictionary';
 import { ITrade } from '../interfaces/ITrade';
 import dateFormatter from './formatDate';
 
@@ -22,7 +22,7 @@ export default class TradeHistory {
     return this.trades.map((trade) => {
       return {
         ...trade,
-        tradeType: dict.other.tradeType[trade.tradeType],
+        tradeType: dict.other.tradeType[trade.tradeType as keyof TradeType],
       };
     });
   }
