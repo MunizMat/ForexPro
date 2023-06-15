@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import AuthController from '../../../src/api/controllers/authController';
 import AuthService from '../../../src/api/services/authServices';
+import { ApiError } from '../../../src/api/helpers/ApiErrors';
 
 jest.mock('../../../src/api/services/authServices');
 
@@ -23,7 +24,7 @@ describe('Auth Controller', () => {
   it('should call login service with correct arguments', async () => {
     const loginSpy = jest.spyOn(AuthService, 'loginUser');
 
-    await AuthController.login(req, res, jest.fn());
+    await AuthController.login(req, res);
 
     expect(loginSpy).toHaveBeenCalledTimes(1);
     expect(loginSpy).toHaveBeenCalledWith(req.body.email, req.body.password);
@@ -44,21 +45,22 @@ describe('Auth Controller', () => {
     jest
       .spyOn(AuthService, 'loginUser')
       .mockResolvedValue({ user: mockUser, token: mockToken });
-    await AuthController.login(req, res, jest.fn());
+    await AuthController.login(req, res);
 
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ user: mockUser, token: mockToken });
   });
 
-  it('should call next() if an error occurs', async () => {
-    const nextFnSpy = jest.fn();
-
+  test('if an error occurs', async () => {
     jest
       .spyOn(AuthService, 'loginUser')
-      .mockRejectedValue(new Error('some error'));
+      .mockRejectedValue(new ApiError('unauthorized', 401));
 
-    await AuthController.login(req, res, nextFnSpy);
+    await AuthController.login(req, res);
 
-    expect(nextFnSpy).toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({
+      errorTranslationMessage: 'unauthorized',
+    });
   });
 });
