@@ -7,6 +7,8 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 - [Getting Started](#getting-started)
 - [Features](#features)
 - [Testing](#testing)
+- - [Using Docker]
+- - [Using Node.js]
 
 ## Getting Started
 
@@ -20,6 +22,9 @@ ps: Docker is recommended for installation, because installation with Node will 
 
 
 ### Installation
+- [Using Docker](#using-docker)
+- [Using Node.js](#using-nodejs)
+
 ### Using Docker
 1. Clone this repository to your local machine:
 ```shell 
