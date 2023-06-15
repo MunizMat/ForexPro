@@ -14,14 +14,13 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 To install the project on your local machine you will need to:
 1. Install [Docker](https://www.docker.com/) or [Node.js](https://nodejs.org/en) on your local machine 
 
-ps: Docker is recommended for installation, because installation with node will require you to have Redis and PostgreSQL setup and installed on your local machine
+ps: Docker is recommended for installation, because installation with Node will require you to have Redis and PostgreSQL setup and installed on your local machine
 
 2. Visit [MetaApi](https://metaapi.cloud/) and create an account. After creating your account, navigate to 'API Access' and generate an API access token for free.
 
-ps: Docker is the recommended way to install the project locally. Installation using node will require you to have Redis and PostgreSQL setup and installed on your local machine
 
 ### Installation
-#### Using Docker
+### Using Docker
 1. Clone this repository to your local machine:
 ```shell 
 git clone https://github.com/MunizMat/ForexPro.git
@@ -64,7 +63,7 @@ docker compose build
 docker compose up
 ```
 
-#### Using Node.js
+### Using Node.js
 1. Clone this repository to your local machine:
 ```shell 
 git clone https://github.com/MunizMat/ForexPro.git
