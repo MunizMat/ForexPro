@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx jest",
-    "test:coverage": "npx jest --coverage",
+    "test:coverage": "npm test -- --coverage --collectCoverageFrom='./src/**'",
     "start": "nodemon index.ts",
     "generate:prisma": "npx prisma migrate dev --name conatinerize",
     "start:dev": "nodemon index.ts",

@@ -6,45 +6,58 @@ import { socket } from '../..';
 import connection from './connection';
 import { ApiError } from '../helpers/ApiErrors';
 
-export const tradeQueue = new Queue<TradeCreationRequest, UserAndTrade>(
-  'Trade',
-  {
-    connection,
-  },
-);
+interface ITradeQueue {
+  queue: Queue<TradeCreationRequest, UserAndTrade, string>;
+  name: string;
+  worker: Worker<TradeCreationRequest, UserAndTrade | ApiError, string>;
+}
 
-export const tradeProcessor = async (job: Job) => {
-  try {
-    const data = await UserServices.addTrade(job.data);
-    return data;
-  } catch (error) {
-    return error as ApiError;
+class TradeQueue implements ITradeQueue {
+  queue: Queue<TradeCreationRequest, UserAndTrade, string>;
+  name: string;
+  worker: Worker<TradeCreationRequest, UserAndTrade | ApiError, string>;
+  constructor() {
+    this.name = 'Trade';
+    this.queue = new Queue<TradeCreationRequest, UserAndTrade>(this.name, {
+      connection,
+    });
+    this.worker = new Worker<TradeCreationRequest, UserAndTrade | ApiError>(
+      this.name,
+      this.processor,
+      {
+        connection,
+      },
+    );
+    this.setListeners();
   }
-};
 
-export const tradeWorker = new Worker<
-  TradeCreationRequest,
-  UserAndTrade | ApiError
->('Trade', tradeProcessor, {
-  connection,
-});
+  processor = async (job: Job) => {
+    try {
+      const data = await UserServices.addTrade(job.data);
+      return data;
+    } catch (error) {
+      return error as ApiError;
+    }
+  };
 
-tradeWorker.on(
-  'completed',
-  (job: Job<TradeCreationRequest, UserAndTrade | ApiError>) => {
+  setListeners() {
+    this.worker.on('completed', this.onCompleted);
+    this.worker.on('failed', this.onFailed);
+  }
+
+  onCompleted = (job: Job<TradeCreationRequest, UserAndTrade | ApiError>) => {
     if (job.returnvalue instanceof ApiError) return;
     const userId = job.returnvalue?.updatedUser.id as number;
     socket.emitToClient(userId, 'tradeCompleted', job.returnvalue);
-  },
-);
+  };
 
-tradeWorker.on(
-  'failed',
-  (
+  onFailed = (
     job: Job<TradeCreationRequest, UserAndTrade | unknown, string> | undefined,
     error: Error,
   ) => {
     console.log('failed');
     console.log(error);
-  },
-);
+  };
+}
+
+export const tradeQueue = new TradeQueue();

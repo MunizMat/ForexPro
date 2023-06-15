@@ -7,7 +7,7 @@ class AuthService {
       password,
     });
 
-    const token = AuthHelpers.generateToken(verifiedUser);
+    const token = AuthHelpers.generateToken(verifiedUser.id);
 
     return {
       user: {

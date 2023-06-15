@@ -11,7 +11,9 @@ jest.mock('../../../src/api/helpers/UserHelper');
 jest.mock('../../../src/api/services/userServices');
 jest.mock('../../../src/api/queues/trade', () => ({
   tradeQueue: {
-    add: jest.fn(),
+    queue: {
+      add: jest.fn(),
+    },
   },
 }));
 
@@ -127,15 +129,15 @@ describe('User Controller Class', () => {
     } as Request;
 
     it('should add the trade to the Trades queue', async () => {
-      jest.spyOn(tradeQueue, 'add');
+      jest.spyOn(tradeQueue.queue, 'add');
 
       await UserController.enqueueTrade(req, res, next);
 
-      expect(tradeQueue.add).toHaveBeenCalledWith('trade', req.body);
+      expect(tradeQueue.queue).toHaveBeenCalledWith('trade', req.body);
     });
 
     it('should respond w/status 200 and correct json if trade succeeds', async () => {
-      jest.spyOn(tradeQueue, 'add').mockResolvedValue({} as Job);
+      jest.spyOn(tradeQueue.queue, 'add').mockResolvedValue({} as Job);
 
       await UserController.enqueueTrade(req, res, next);
 
@@ -146,7 +148,9 @@ describe('User Controller Class', () => {
     });
 
     it('should call next() if an error occurs', async () => {
-      jest.spyOn(tradeQueue, 'add').mockRejectedValue(new Error('some error'));
+      jest
+        .spyOn(tradeQueue.queue, 'add')
+        .mockRejectedValue(new Error('some error'));
 
       await UserController.enqueueTrade(req, res, next);
 

@@ -1,4 +1,3 @@
-import { User } from '@prisma/client';
 import UserServices from '../services/userServices';
 import jwt from 'jsonwebtoken';
 import { IUserCredentials } from '../interfaces/IUserCredentials';
@@ -15,8 +14,8 @@ export default class AuthHelpers {
     return user;
   }
 
-  static generateToken(user: User) {
-    return jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY ?? '', {
+  static generateToken(userId: number) {
+    return jwt.sign({ userId }, process.env.JWT_SECRET_KEY ?? '', {
       expiresIn: '2d',
     });
   }

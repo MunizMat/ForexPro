@@ -2,6 +2,7 @@ import AuthHelpers from '../../../src/api/helpers/AuthHelpers';
 import UserServices from '../../../src/api/services/userServices';
 import UserHelpers from '../../../src/api/helpers/UserHelper';
 import { Trade, User } from '@prisma/client';
+import jwt from 'jsonwebtoken';
 
 jest.mock('../../../src/api/services/userServices');
 jest.mock('../../../src/api/helpers/UserHelper');
@@ -41,6 +42,23 @@ describe('Auth Helper Class', () => {
       );
 
       expect(result).toEqual(mockUser);
+    });
+  });
+
+  describe('generateToken method', () => {
+    it('should call jwt.sign w/correct args', () => {
+      const userId = 1;
+      const jwtSpy = jest.spyOn(jwt, 'sign');
+      AuthHelpers.generateToken(userId);
+      expect(jwtSpy).toHaveBeenCalledWith({ userId: 1 }, expect.any(String), {
+        expiresIn: '2d',
+      });
+    });
+
+    it('should generate a JWT token', () => {
+      const userId = 1;
+      const token = AuthHelpers.generateToken(userId);
+      expect(token).toBeDefined();
     });
   });
 });

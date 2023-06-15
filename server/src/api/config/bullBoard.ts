@@ -7,6 +7,6 @@ export const serverAdapter = new ExpressAdapter();
 serverAdapter.setBasePath('/admin/queues');
 
 createBullBoard({
-  queues: [new BullMQAdapter(tradeQueue)],
+  queues: [new BullMQAdapter(tradeQueue.queue)],
   serverAdapter,
 });
