@@ -11,7 +11,7 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 ## Getting Started
 
 ### Prerequisites
-To install the project on your local machine you will need to:
+To install and run the project on your local machine you will need to:
 1. Install [Docker](https://www.docker.com/) or [Node.js](https://nodejs.org/en) on your local machine 
 
 ps: Docker is recommended for installation, because installation with Node will require you to have Redis and PostgreSQL setup and installed on your local machine
@@ -119,12 +119,14 @@ redis-server
 
 . Run the backend: 
 ```shell 
+npm run build
 npm run start
 ```
 8. On a separate Teminal window, run the frontend: 
 ```shell 
 cd client
-npm run dev
+npm run build
+npm run start
 ```
 
 

@@ -133,7 +133,9 @@ describe('User Controller Class', () => {
 
       await UserController.enqueueTrade(req, res, next);
 
-      expect(tradeQueue.queue).toHaveBeenCalledWith('trade', req.body);
+      expect(tradeQueue.queue.add).toHaveBeenCalledWith('trade', req.body, {
+        delay: 5000,
+      });
     });
 
     it('should respond w/status 200 and correct json if trade succeeds', async () => {

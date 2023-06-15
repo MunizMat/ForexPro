@@ -9,11 +9,24 @@ describe('Auth Services Class', () => {
     const email = 'test@example.com';
     const password = 'Password123';
 
+    const mockVerifiedUser = {
+      id: 1,
+      name: 'Test',
+      email: 'test@example.com',
+      password: 'Password123',
+    } as User & {
+      trades: Trade[];
+    };
+
     afterEach(() => {
       jest.restoreAllMocks();
     });
 
     it('should call auth helper to verify credentials', async () => {
+      jest
+        .spyOn(AuthHelpers, 'verifyUserCredentials')
+        .mockResolvedValueOnce(mockVerifiedUser);
+
       await AuthService.loginUser(email, password);
 
       expect(AuthHelpers.verifyUserCredentials).toHaveBeenCalledWith({
@@ -23,21 +36,13 @@ describe('Auth Services Class', () => {
     });
 
     it('should call auth helper to generate token', async () => {
-      const mockVerifiedUser = {
-        name: 'Test',
-        email: 'test@example.com',
-        password: 'Password123',
-      } as User & {
-        trades: Trade[];
-      };
-
       jest
         .spyOn(AuthHelpers, 'verifyUserCredentials')
         .mockResolvedValue(mockVerifiedUser);
 
       await AuthService.loginUser(email, password);
 
-      expect(AuthHelpers.generateToken).toHaveBeenCalledWith(mockVerifiedUser);
+      expect(AuthHelpers.generateToken).toHaveBeenCalledWith(1);
     });
 
     it('should return user and token', async () => {

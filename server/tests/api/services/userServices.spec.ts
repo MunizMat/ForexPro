@@ -3,6 +3,8 @@ import DatabaseServices from '../../../src/api/services/databaseServices';
 import UserServices from '../../../src/api/services/userServices';
 import { ApiError } from '../../../src/api/helpers/ApiErrors';
 import hashPassword from '../../../src/api/helpers/hashPassword';
+import { TradeCreationRequest } from '../../../src/api/types/TradeCreationRequest';
+import UserHelpers from '../../../src/api/helpers/UserHelper';
 
 jest.mock('../../../src/api/helpers/ApiErrors');
 jest.mock('../../../src/api/helpers/hashPassword');
@@ -66,9 +68,9 @@ describe('User Services Class', () => {
 
       try {
         await UserServices.getHashedPassword(mockPassword);
-      } catch (error) {}
-
-      expect(ApiError.handle).toHaveBeenCalledWith(mockError);
+      } catch (error) {
+        expect(ApiError.handle).toHaveBeenCalledWith(mockError);
+      }
     });
   });
 
@@ -109,9 +111,69 @@ describe('User Services Class', () => {
     });
   });
 
-  // describe('checkUserExistence() method', () => {
-  //   it('should check user existence', async () => {
-  //     await UserServices.checkUserExistence(email);
-  //   });
-  // });
+  describe('addTrade() method', () => {
+    test('adding a trade to the user', async () => {
+      const mockJobData = {
+        user: {
+          id: 1,
+        },
+        newTrade: {},
+      } as TradeCreationRequest;
+
+      const mockNewAccBalances = {
+        accountBalanceGBP: 5000,
+        accountBalanceUSD: 5000,
+      };
+      const mockUpdatedUser = {
+        id: 1,
+        accountBalanceGBP: 5000,
+      } as User & {
+        trades: Trade[];
+      };
+
+      jest
+        .spyOn(UserHelpers, 'getUpdatedAccountBalance')
+        .mockReturnValue(mockNewAccBalances);
+
+      jest
+        .spyOn(DatabaseServices, 'updateUserBalanceAndAddTrade')
+        .mockResolvedValue(mockUpdatedUser);
+      const result = await UserServices.addTrade(mockJobData);
+
+      expect(result).toEqual({
+        updatedUser: mockUpdatedUser,
+        newTrade: mockJobData.newTrade,
+      });
+    });
+  });
+
+  describe('checkUserExistence() method', () => {
+    const mockEmail = 'mock@email';
+
+    test('user exists', async () => {
+      const mockUser = { id: 1 } as User & {
+        trades: Trade[];
+      };
+
+      jest
+        .spyOn(DatabaseServices, 'getUserAndTradeHistory')
+        .mockResolvedValue(mockUser);
+
+      const result = await UserServices.checkUserExistence(mockEmail);
+
+      expect(result).toBe(mockUser);
+    });
+
+    test('user does not exist', async () => {
+      jest
+        .spyOn(DatabaseServices, 'getUserAndTradeHistory')
+        .mockRejectedValue(new Error('someError'));
+
+      try {
+        await UserServices.checkUserExistence(mockEmail);
+      } catch (error) {
+        expect(error).toBeInstanceOf(ApiError);
+      }
+    });
+  });
 });
