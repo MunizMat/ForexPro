@@ -30,6 +30,7 @@ class Socket {
 
   initConnection() {
     this.io.on('connection', async (socket) => {
+      console.log('A client connected');
       socket.on('userId', (id) => {
         const previousSocket: ioSocket | undefined = this.connectedClients[id];
         if (previousSocket) {
