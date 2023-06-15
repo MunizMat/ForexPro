@@ -12,7 +12,10 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 
 ### Prerequisites
 To install the project on your local machine you will need to:
-1. Install [Docker](https://www.docker.com/) or [Node.js](https://nodejs.org/en) on your local machine (installation using Node requires Redis and PostgreSQL installed locally)
+1. Install [Docker](https://www.docker.com/) or [Node.js](https://nodejs.org/en) on your local machine 
+
+ps: Docker is recommended for installation, because installation with node will require you to have Redis and PostgreSQL setup and installed on your local machine
+
 2. Visit [MetaApi](https://metaapi.cloud/) and create an account. After creating your account, navigate to 'API Access' and generate an API access token for free.
 
 ps: Docker is the recommended way to install the project locally. Installation using node will require you to have Redis and PostgreSQL setup and installed on your local machine
