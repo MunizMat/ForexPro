@@ -48,12 +48,12 @@ class Socket {
   }
 
   async sendCurrencyRates(socket: ioSocket) {
-    const currencyServices = await CurrencyServices.init();
+    await CurrencyServices.init();
 
-    socket.emit('sendRates', currencyServices.getRates('GBPUSD'));
+    socket.emit('sendRates', CurrencyServices.getRates('GBPUSD'));
 
     return setInterval(() => {
-      socket.emit('sendRates', currencyServices.getRates('GBPUSD'));
+      socket.emit('sendRates', CurrencyServices.getRates('GBPUSD'));
     }, 1000);
   }
 

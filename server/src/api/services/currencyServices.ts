@@ -13,15 +13,14 @@ export default class CurrencyServices {
   }
 
   static async init() {
-    const accountId = process.env.META_API_ACCOUNT_ID ?? '';
-    const token = process.env.META_API_TOKEN ?? '';
     if (!CurrencyServices.connection) {
+      const accountId = process.env.META_API_ACCOUNT_ID ?? '';
+      const token = process.env.META_API_TOKEN ?? '';
       CurrencyServices.connection = await CurrencyServices.getMetaApiConnection(
         accountId,
         token,
       );
     }
-    return new CurrencyServices(accountId, token);
   }
 
   static async getMetaApiConnection(accountId: string, token: string) {
@@ -35,7 +34,7 @@ export default class CurrencyServices {
     return connection;
   }
 
-  getRates(currencyPair: string) {
+  static getRates(currencyPair: string) {
     const terminalState = CurrencyServices.connection.terminalState;
 
     const { ask, bid, time, symbol } = terminalState.price(currencyPair);
