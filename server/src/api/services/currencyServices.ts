@@ -5,22 +5,23 @@ import MetaApi, { StreamingMetaApiConnectionInstance } from 'metaapi.cloud-sdk';
 export default class CurrencyServices {
   public accountId: string;
   public token: string;
-  public connection: StreamingMetaApiConnectionInstance;
-  private constructor(
-    connection: StreamingMetaApiConnectionInstance,
-    accountId: string,
-    token: string,
-  ) {
+  public static connection: StreamingMetaApiConnectionInstance;
+
+  private constructor(accountId: string, token: string) {
     this.accountId = accountId;
     this.token = token;
-    this.connection = connection;
   }
 
   static async init() {
     const accountId = process.env.META_API_ACCOUNT_ID ?? '';
     const token = process.env.META_API_TOKEN ?? '';
-    const connection = await this.getMetaApiConnection(accountId, token);
-    return new CurrencyServices(connection, accountId, token);
+    if (!CurrencyServices.connection) {
+      CurrencyServices.connection = await CurrencyServices.getMetaApiConnection(
+        accountId,
+        token,
+      );
+    }
+    return new CurrencyServices(accountId, token);
   }
 
   static async getMetaApiConnection(accountId: string, token: string) {
@@ -35,7 +36,7 @@ export default class CurrencyServices {
   }
 
   getRates(currencyPair: string) {
-    const terminalState = this.connection.terminalState;
+    const terminalState = CurrencyServices.connection.terminalState;
 
     const { ask, bid, time, symbol } = terminalState.price(currencyPair);
     return {

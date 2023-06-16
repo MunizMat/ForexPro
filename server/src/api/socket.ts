@@ -42,7 +42,7 @@ class Socket {
 
       socket.on('disconnect', () => {
         console.log('A user disconnected.');
-        clearInterval(intervalId);
+        if (intervalId) clearInterval(intervalId);
       });
     });
   }
@@ -54,7 +54,7 @@ class Socket {
 
     return setInterval(() => {
       socket.emit('sendRates', currencyServices.getRates('GBPUSD'));
-    }, 5000);
+    }, 1000);
   }
 
   emitToClient(userId: number, eventName: string, eventData: unknown) {
