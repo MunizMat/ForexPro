@@ -10,7 +10,6 @@ const errorHandler = (
   const errorTranslationReference = error.translationReference
     ? error.translationReference
     : 'default';
-  console.log(statusCode, errorTranslationReference);
   return res.status(statusCode).json({ errorTranslationReference });
 };
 

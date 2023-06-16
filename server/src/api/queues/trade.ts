@@ -12,10 +12,11 @@ interface ITradeQueue {
   worker: Worker<TradeCreationRequest, UserAndTrade | ApiError, string>;
 }
 
-class TradeQueue implements ITradeQueue {
+export class TradeQueue implements ITradeQueue {
   queue: Queue<TradeCreationRequest, UserAndTrade, string>;
   name: string;
   worker: Worker<TradeCreationRequest, UserAndTrade | ApiError, string>;
+
   constructor() {
     this.name = 'Trade';
     this.queue = new Queue<TradeCreationRequest, UserAndTrade>(this.name, {
@@ -31,7 +32,7 @@ class TradeQueue implements ITradeQueue {
     this.setListeners();
   }
 
-  processor = async (job: Job) => {
+  processor = async (job: Job<TradeCreationRequest>) => {
     try {
       const data = await UserServices.addTrade(job.data);
       return data;
