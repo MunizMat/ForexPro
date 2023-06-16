@@ -27,12 +27,15 @@ export class TradeQueue implements ITradeQueue {
       this.processor,
       {
         connection,
+        concurrency: 1,
       },
     );
     this.setListeners();
   }
 
   processor = async (job: Job<TradeCreationRequest>) => {
+    const delayMilliseconds = 10000; // Adjust the delay time as needed
+    await new Promise((resolve) => setTimeout(resolve, delayMilliseconds));
     try {
       const data = await UserServices.addTrade(job.data);
       return data;
