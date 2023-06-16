@@ -9,4 +9,4 @@ RUN npm install
 
 COPY . .
 
-CMD ["npm", "test"]
+CMD ["npx", "jest", "--coverage"]

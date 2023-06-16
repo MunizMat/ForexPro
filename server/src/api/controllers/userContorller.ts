@@ -31,7 +31,7 @@ export default class UserController {
   static async enqueueTrade(req: Request, res: Response, next: NextFunction) {
     const jobData = req.body as TradeCreationRequest;
     try {
-      await tradeQueue.queue.add('trade', jobData, { delay: 5000 });
+      await tradeQueue.queue.add('trade', jobData, { delay: 15000 });
       return res.status(200).json({
         refrenceForTranslation: 'tradeProcessing',
       });

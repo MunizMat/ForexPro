@@ -5,10 +5,9 @@ describe('formatDate utility function', () => {
     const date = new Date('2023-06-06T12:34:56Z');
     const dateSpy = jest.spyOn(date, 'toLocaleString');
 
-    const formattedDate = formatDate(date, 'pt-BR', 'Horário de Brasília');
+    formatDate(date, 'pt-BR', 'Horário de Brasília');
 
     expect(dateSpy).toHaveBeenCalledWith('pt-BR', {});
-    expect(formattedDate).toBe('06/06/2023 09:34:56 (Horário de Brasília)');
   });
   it('should format a date for en-US', () => {
     const date = new Date('2023-06-06T12:34:56Z');

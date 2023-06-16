@@ -11,6 +11,8 @@ services:
       - api
     volumes:
       - ./client:/app
+      - /app/node_modules
+      - /app/.next
   api:
     container_name: "api"
     build: 

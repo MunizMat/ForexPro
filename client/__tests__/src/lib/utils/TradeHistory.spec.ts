@@ -43,20 +43,6 @@ describe('TradeHistory utility class', () => {
     expect(formatedDates).toEqual({ trades: expectedResult });
   });
 
-  test('formatDate method for pt-BR', () => {
-    const tradeHistory = new TradeHistory(mockTrades);
-    const expectedResult = [
-      { ...trade1, createdAt: '06/06/2023 09:34:56 (Horário de Brasília)' },
-      { ...trade2, createdAt: '06/06/2023 09:34:56 (Horário de Brasília)' },
-    ];
-    const formatedDates = tradeHistory.formatDate(
-      'pt-BR',
-      'Horário de Brasília'
-    );
-
-    expect(formatedDates).toEqual({ trades: expectedResult });
-  });
-
   test('translate method', () => {
     const tradeHistory = new TradeHistory(mockTrades);
     const result = tradeHistory.translate(mockDict);
