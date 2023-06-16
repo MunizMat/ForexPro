@@ -4,7 +4,11 @@ import mockDict from '../../../../../mocks/dict';
 
 describe('TableHeaders', () => {
   it('should render the table headers', () => {
-    render(<TableHeaders {...mockDict.tradeHistory} />);
+    render(
+      <table>
+        <TableHeaders {...mockDict.tradeHistory} />
+      </table>
+    );
 
     expect(screen.getByText('Timestamp')).toBeInTheDocument();
     expect(screen.getByText('Currency Pair')).toBeInTheDocument();
