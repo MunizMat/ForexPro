@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { useContext } from 'react';
-import { AuthContext } from 'src/lib/contexts/AuthContext';
-import { Locale } from 'src/lib/i18n/config';
-import { IDictionary } from 'src/lib/interfaces/IDictionary';
+import { AuthContext } from '../../contexts/AuthContext';
+import { Locale } from '../../i18n/config';
+import { IDictionary } from '../../interfaces/IDictionary';
 
 interface Props {
   dict: IDictionary;

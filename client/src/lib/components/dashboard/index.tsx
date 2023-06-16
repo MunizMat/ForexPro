@@ -1,6 +1,6 @@
-import { Locale } from 'src/lib/i18n/config';
+import { Locale } from '../../i18n/config';
 import Header from './Header';
-import { IDictionary } from 'src/lib/interfaces/IDictionary';
+import { IDictionary } from '../../interfaces/IDictionary';
 import tradingImg from '../../../../public/images/tradingImage.jpg';
 import Image from 'next/image';
 import Trade from './Trade';

@@ -1,4 +1,4 @@
-import { TradeHistory } from 'src/lib/interfaces/IDictionary';
+import { TradeHistory } from '../../interfaces/IDictionary';
 
 export default function TableHeaders(props: TradeHistory) {
   return (

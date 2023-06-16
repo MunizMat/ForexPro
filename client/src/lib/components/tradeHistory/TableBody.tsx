@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { AuthContext } from 'src/lib/contexts/AuthContext';
-import { Locale } from 'src/lib/i18n/config';
-import { IDictionary } from 'src/lib/interfaces/IDictionary';
-import TradeHistory from 'src/lib/utils/TradeHistory';
+import { AuthContext } from '../../contexts/AuthContext';
+import { Locale } from '../../i18n/config';
+import { IDictionary } from '../../interfaces/IDictionary';
+import TradeHistory from '../../utils/TradeHistory';
 
 interface Props {
   locale: Locale;
