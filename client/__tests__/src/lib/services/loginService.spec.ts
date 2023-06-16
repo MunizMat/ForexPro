@@ -4,7 +4,7 @@ import loginService, {
 } from '../../../../src/lib/services/loginService';
 import { toast } from 'react-toastify';
 import api from '../../../../src/lib/config/axios';
-import { IDictionary } from 'src/lib/interfaces/IDictionary';
+import mockDict from '../../../../mocks/dict';
 
 jest.mock('../../../../src/lib/config/axios');
 jest.mock('react-toastify');
@@ -24,17 +24,6 @@ describe('loginService', () => {
     email: 'johndoes@example.com',
     password: 'Password13',
   };
-
-  const mockDict = {
-    toasts: {
-      pending: {
-        login: '',
-      },
-      success: {
-        login: '',
-      },
-    },
-  } as IDictionary;
 
   it('should call toast.promise', async () => {
     const toastSpy = jest.spyOn(toast, 'promise');

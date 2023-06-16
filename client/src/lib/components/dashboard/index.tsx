@@ -20,6 +20,7 @@ function Dashboard({ locale, dict, baseCurrency, currencyPair }: Props) {
       </div>
       <div className="row p-3">
         <Image
+          data-testid="trading-image"
           className="dashboard-image"
           alt="trading-image"
           src={tradingImg}
@@ -27,6 +28,7 @@ function Dashboard({ locale, dict, baseCurrency, currencyPair }: Props) {
       </div>
       <div className="row">
         <Trade
+          data-testid="trade"
           locale={locale}
           dict={dict}
           baseCurrency={baseCurrency}

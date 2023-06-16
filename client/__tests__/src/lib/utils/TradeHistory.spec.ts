@@ -1,5 +1,6 @@
 import { ITrade } from 'src/lib/interfaces/ITrade';
 import TradeHistory from '../../../../src/lib/utils/TradeHistory';
+import mockDict from '../../../../mocks/dict';
 
 describe('TradeHistory utility class', () => {
   const trade1 = {
@@ -54,5 +55,12 @@ describe('TradeHistory utility class', () => {
     );
 
     expect(formatedDates).toEqual({ trades: expectedResult });
+  });
+
+  test('translate method', () => {
+    const tradeHistory = new TradeHistory(mockTrades);
+    const result = tradeHistory.translate(mockDict);
+
+    expect(result).toEqual(mockTrades);
   });
 });

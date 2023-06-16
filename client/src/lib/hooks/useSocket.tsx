@@ -32,8 +32,7 @@ export const useSocket = (currencyPair: string, dict: IDictionary) => {
       'tradeCompleted',
       ({ updatedUser, newTrade }: TradeCompletedResponse) => {
         setAuthState({
-          isAuthenticated: true,
-          token: authState.token,
+          ...authState,
           user: updatedUser,
         });
         toast.success(

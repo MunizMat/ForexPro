@@ -10,7 +10,6 @@ jest.mock('../../../../src/lib/utils/persistAuthState');
 describe('useAuthState hook', () => {
   it('should change auth state', () => {
     const mockInicialAuthState = {
-      isAuthenticated: false,
       user: null,
       token: null,
     };
@@ -24,7 +23,11 @@ describe('useAuthState hook', () => {
     } as IAuthState;
     (parseLocalStorage as jest.Mock).mockReturnValue(mockInicialAuthState);
     const { result } = renderHook(() => useAuthState());
-    expect(result.current.authState).toEqual(mockInicialAuthState);
+    expect(result.current.authState.isAuthenticated).toBe(false);
+    expect(result.current.authState).toEqual({
+      ...mockInicialAuthState,
+      isAuthenticated: false,
+    });
 
     act(() => {
       result.current.setAuthState(mockUpdatedAuthState);
@@ -32,5 +35,14 @@ describe('useAuthState hook', () => {
 
     expect(result.current.authState).toEqual(mockUpdatedAuthState);
     expect(persistAuthState).toHaveBeenCalledWith(mockUpdatedAuthState);
+  });
+
+  test('Initial auth state', () => {
+    (parseLocalStorage as jest.Mock).mockReturnValue({
+      token: 'null',
+      user: null,
+    });
+    const { result } = renderHook(() => useAuthState());
+    expect(result.current.authState.isAuthenticated).toBe(false);
   });
 });

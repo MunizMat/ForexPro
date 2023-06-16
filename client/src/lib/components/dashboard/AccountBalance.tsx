@@ -14,6 +14,11 @@ export default function AccountBalance({
       )} | $ ${user.accountBalanceUSD.toFixed(2)}`}
     </Navbar.Text>
   ) : (
-    <Placeholder bg="primary" as={Navbar.Text} animation="wave" />
+    <Placeholder
+      data-testid="acc-balance"
+      bg="primary"
+      as={Navbar.Text}
+      animation="wave"
+    />
   );
 }
