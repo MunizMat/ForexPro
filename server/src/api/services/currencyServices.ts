@@ -23,7 +23,7 @@ export default class CurrencyServices {
     }
   }
 
-  static async getMetaApiConnection(accountId: string, token: string) {
+  private static async getMetaApiConnection(accountId: string, token: string) {
     const api = new MetaApi(token);
     const account = await api.metatraderAccountApi.getAccount(accountId);
     const connection = account.getStreamingConnection();
