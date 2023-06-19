@@ -1,6 +1,6 @@
 <h1 align="center">ForexPro</h1>
 
-![ForexPro](/images/forexPro.png)
+<img width="740" alt="Captura de Tela 2023-06-19 às 09 16 51" src="https://github.com/MunizMat/ForexPro/assets/103901768/4a328b79-6a13-4b35-9716-0f9fe4a1af96">
 
 ForexPro is a foreign exchange web application for performing mock (simulated) trades for the GBP/USD and USD/GBP currency pairs, using real-time data for the exchange rates of each of them. The application provides a dashboard where users can select a currency pair, insert a desired amount for buy or sell, and execute the mock trade. Each user starts with a default account balance of $5000 and £5000 and each user has a trade history listing all their past trades. 
 
