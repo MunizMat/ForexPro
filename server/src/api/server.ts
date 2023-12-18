@@ -1,7 +1,8 @@
 import { createServer, Server } from 'http';
 import { Application } from 'express';
-import dotenv from 'dotenv';
-dotenv.config();
+import { config } from 'dotenv';
+
+config();
 
 class MyServer {
   public server: Server;

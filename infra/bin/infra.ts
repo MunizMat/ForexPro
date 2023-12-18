@@ -1,6 +1,10 @@
 #!/usr/bin/env node
-import * as cdk from 'aws-cdk-lib';
-import { InfraStack } from '../lib/infra-stack';
+import { App } from 'aws-cdk-lib';
+import { ForexProStack } from '../lib/forexpro-stack';
+import { config } from 'dotenv';
 
-const app = new cdk.App();
-new InfraStack(app, 'InfraStack');
+config();
+
+
+const app = new App();
+new ForexProStack(app, 'ForexProStack');

@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import errorHandler from './middlewares/errorHandler';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
-import { serverAdapter } from './config/bullBoard';
 
 class App {
   app: Application;
@@ -24,7 +23,6 @@ class App {
   useRoutes() {
     this.app.use('/users', userRoutes);
     this.app.use('/auth', authRoutes);
-    this.app.use('/admin/queues', serverAdapter.getRouter());
   }
   useErrorHandler() {
     this.app.use(errorHandler);
