@@ -15,7 +15,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.476.0",
     "@aws-sdk/client-sqs": "^3.474.0",
+    "@aws-sdk/lib-dynamodb": "^3.476.0",
     "@bull-board/api": "^5.2.1",
     "@bull-board/express": "^5.2.1",
     "@prisma/client": "^4.15.0",

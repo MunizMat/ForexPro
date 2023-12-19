@@ -1,6 +1,6 @@
 import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Queue } from 'aws-cdk-lib/aws-sqs';
-import { AttributeType, Table } from 'aws-cdk-lib/aws-dynamodb';
+import { AttributeType, ProjectionType, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { Construct } from 'constructs';
 
 export class ForexProStack extends Stack {
@@ -15,12 +15,22 @@ export class ForexProStack extends Stack {
       queueName: 'TradesQueue.fifo',
     });
 
-    const user_trades_table = new Table(this, 'UserTradesTable', {
+    const user_trades_table = new Table(this, 'ForexPro-TradesUser', {
       partitionKey: {
         name: 'partition_key',
         type: AttributeType.STRING,
       },
       sortKey: { name: 'sort_key', type: AttributeType.STRING },
+      tableName: 'ForexPro-TradesUser',
+    });
+
+    user_trades_table.addGlobalSecondaryIndex({
+      indexName: 'email_index',
+      partitionKey: {
+        name: 'email',
+        type: AttributeType.STRING,
+      },
+      projectionType: ProjectionType.ALL,
     });
   }
 }

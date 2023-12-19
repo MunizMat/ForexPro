@@ -55,6 +55,7 @@ class UserServices {
       const user = await DatabaseServices.getUserAndTradeHistory(email);
       return user;
     } catch (error) {
+      console.log(error);
       throw new ApiError('userDoesntExist', 400);
     }
   }

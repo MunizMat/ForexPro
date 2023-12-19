@@ -18,7 +18,7 @@ export default class UserController {
       const user = await UserServices.create(validatedUser);
       return res.status(201).json({
         user: {
-          ...(user as User),
+          ...(user as unknown as User),
           password: '',
         },
       });
