@@ -20,7 +20,7 @@ export const saveTrade = async (
       newTrade,
     };
     const response: TradeResponse = await toast.promise(
-      api.post(`/users/${user.id}/trade`, body, {
+      api.post(`/users/${user.user_id}/trade`, body, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },

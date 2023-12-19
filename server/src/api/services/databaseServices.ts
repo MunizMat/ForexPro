@@ -5,6 +5,7 @@ import { ApiError } from '../helpers/ApiErrors';
 import { dynamo_document } from '../../clients/dynamo';
 import { config } from 'dotenv';
 import { randomUUID } from 'crypto';
+import { ReturnValue } from '@aws-sdk/client-dynamodb';
 
 config();
 
@@ -90,23 +91,20 @@ export default class DatabaseServices {
       }),
       dynamo_document.update({
         Key: {
-          partition_key: `user#${user.id}`,
-          sort_key: `user#${user.id}`,
+          partition_key: `user#${user.user_id}`,
+          sort_key: `user#${user.user_id}`,
         },
         TableName,
         UpdateExpression:
           'set accountBalanceGBP = :accountBalanceGBP, accountBalanceUSD = :accountBalanceUSD',
-        ExpressionAttributeNames: {
-          accountBalanceGBP: 'accountBalanceGBP',
-          accountBalanceUSD: 'accountBalanceUSD',
-        },
         ExpressionAttributeValues: {
           ':accountBalanceGBP': accountBalanceGBP,
           ':accountBalanceUSD': accountBalanceUSD,
         },
+        ReturnValues: ReturnValue.ALL_NEW,
       }),
     ]);
-    console.log(updatedUser);
+    // return { updatedUser: updatedUser.Attributes, newTrade: Item };
     return updatedUser.Attributes;
   }
 }

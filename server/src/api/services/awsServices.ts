@@ -35,7 +35,7 @@ export default class AwsServices {
 
         if (result instanceof ApiError) throw result;
 
-        const userId = result?.updatedUser?.id;
+        const userId = result?.updatedUser?.user_id;
 
         await sqs.deleteMessage({
           ReceiptHandle,

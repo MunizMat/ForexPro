@@ -32,6 +32,7 @@ class Socket {
     this.io.on('connection', async (socket) => {
       console.log('A client connected');
       socket.on('userId', (id) => {
+        console.log(id);
         const previousSocket: ioSocket | undefined = this.connectedClients[id];
         if (previousSocket) {
           previousSocket.disconnect();
