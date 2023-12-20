@@ -39,6 +39,26 @@ export default class DatabaseServices {
     }
   }
 
+  static async getUser(id: string) {
+    const { Items: data } = await dynamo_document.query({
+      TableName,
+      KeyConditionExpression: 'partition_key = :partition_key',
+      ExpressionAttributeValues: {
+        ':partition_key': `user#${id}`,
+      },
+    });
+
+    if (!data || !data.length) throw new Error('User not found');
+
+    const user = data.find(({ datatype }) => datatype === 'user');
+
+    if (!user) throw new Error('User not found');
+
+    user.trades = data.filter(({ datatype }) => datatype === 'trade');
+
+    return user;
+  }
+
   static async getUserAndTradeHistory(email: string) {
     const { Items } = await dynamo_document.query({
       TableName,
@@ -51,20 +71,7 @@ export default class DatabaseServices {
 
     if (!Items || !Items?.length) throw new Error('User does not exist');
 
-    const user = Items[0];
-    user.trades = [];
-
-    const { Items: data } = await dynamo_document.query({
-      TableName,
-      KeyConditionExpression: 'partition_key = :partition_key',
-      ExpressionAttributeValues: {
-        ':partition_key': `user#${user.user_id}`,
-      },
-    });
-
-    if (!data || !data.length) return user;
-
-    user.trades = data.filter(({ datatype }) => datatype === 'trade');
+    const user = await this.getUser(Items[0].user_id);
 
     return user;
   }
@@ -84,7 +91,7 @@ export default class DatabaseServices {
       createdAt: Date.now(),
     };
 
-    const [, updatedUser] = await Promise.all([
+    await Promise.all([
       dynamo_document.put({
         TableName,
         Item,
@@ -104,7 +111,7 @@ export default class DatabaseServices {
         ReturnValues: ReturnValue.ALL_NEW,
       }),
     ]);
-    // return { updatedUser: updatedUser.Attributes, newTrade: Item };
-    return updatedUser.Attributes;
+
+    return await this.getUser(user.user_id);
   }
 }

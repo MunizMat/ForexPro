@@ -5,7 +5,9 @@ import dateFormatter from './formatDate';
 
 export default class TradeHistory {
   constructor(public trades: ITrade[]) {
-    this.trades = trades;
+    this.trades = trades.sort(
+      (a, b) => Number(a.createdAt) - Number(b.createdAt)
+    );
   }
 
   formatDate(locale: Locale, timezone: string) {

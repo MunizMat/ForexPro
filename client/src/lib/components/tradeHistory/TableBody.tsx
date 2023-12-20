@@ -12,8 +12,6 @@ interface Props {
 export default function TableBody({ locale, dict }: Props) {
   const { user } = useContext(AuthContext).authState;
 
-  console.log(user);
-
   const formattedTrades = user
     ? new TradeHistory(user.trades)
         .formatDate(locale, dict.other.timezone)
