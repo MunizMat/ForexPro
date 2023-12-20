@@ -26,6 +26,7 @@ export default class AwsServices {
     if (!Messages || !Messages?.length) return;
 
     Messages.forEach(async ({ Body, ReceiptHandle }) => {
+      await new Promise((resolve) => setTimeout(resolve, 5000)); // 5s delay
       if (!Body || !ReceiptHandle) return null;
 
       const data = JSON.parse(Body);
@@ -41,8 +42,6 @@ export default class AwsServices {
           ReceiptHandle,
           QueueUrl: process.env.SQS_QUEUE_URL,
         });
-
-        await new Promise((resolve) => setTimeout(resolve, 5000)); // 5s delay
 
         socket.emitToClient(userId, 'tradeCompleted', result);
       } catch (error) {
