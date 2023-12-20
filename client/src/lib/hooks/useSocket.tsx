@@ -26,7 +26,7 @@ export const useSocket = (currencyPair: string, dict: IDictionary) => {
       console.log('Connected to server');
     });
 
-    socket.emit('userId', user.id);
+    socket.emit('userId', user.user_id);
 
     socket.on(
       'tradeCompleted',
