@@ -1,5 +1,6 @@
 import App from './api/app';
 import Server from './api/server';
+import AwsServices from './api/services/awsServices';
 import Socket from './api/socket';
 
 export class ForexPro {
@@ -12,3 +13,5 @@ export class ForexPro {
 }
 
 export const socket = ForexPro.init();
+
+setInterval(() => AwsServices.processQueueMessage(socket), 10000);

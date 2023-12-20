@@ -15,6 +15,7 @@ export default class DatabaseServices {
       });
       return newUser;
     } catch (error) {
+      console.log(error);
       throw ApiError.handle(error);
     }
   }
