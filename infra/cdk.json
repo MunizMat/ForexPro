@@ -62,7 +62,8 @@
     "@aws-cdk/aws-codepipeline-actions:useNewDefaultBranchForCodeCommitSource": true,
     "ForexPro": {
       "dynamo_table_name": "ForexPro-UserTrades",
-      "sqs_queue_name": "TradesQueue.fifo"
+      "sqs_queue_name": "TradesQueue.fifo",
+      "secret_name": "ForexProSecret"
     }
   }
 }
