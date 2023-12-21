@@ -7,12 +7,19 @@ import {
 } from 'aws-cdk-lib/aws-dynamodb';
 import { Construct } from 'constructs';
 
+/* ------------ Interfaces -------------- */
+interface Props {
+  dynamo_table_name: string;
+}
+
 export class ForexProDynamoTable extends Construct {
   public readonly table: Table;
   public readonly global_secondary_indexes: GlobalSecondaryIndexProps[];
 
-  constructor(scope: Construct, id: string) {
+  constructor(scope: Construct, id: string, props: Props) {
     super(scope, id);
+
+    const { dynamo_table_name } = props;
 
     /* ----------- Dynamo Table ------------ */
     this.table = new Table(this, 'ForexPro-TradesUser', {
@@ -21,7 +28,7 @@ export class ForexProDynamoTable extends Construct {
         type: AttributeType.STRING,
       },
       sortKey: { name: 'sort_key', type: AttributeType.STRING },
-      tableName: 'ForexPro-TradesUser',
+      tableName: dynamo_table_name,
     });
 
     /* ----------- GSI's ------------ */
