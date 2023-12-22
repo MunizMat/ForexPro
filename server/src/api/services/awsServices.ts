@@ -25,9 +25,10 @@ export default class AwsServices {
 
     if (!Messages || !Messages?.length) return;
 
-    Messages.forEach(async ({ Body, ReceiptHandle }) => {
+    for (const { Body, ReceiptHandle } of Messages) {
       await new Promise((resolve) => setTimeout(resolve, 5000)); // 5s delay
-      if (!Body || !ReceiptHandle) return null;
+
+      if (!Body || !ReceiptHandle) continue;
 
       const data = JSON.parse(Body);
 
@@ -47,6 +48,6 @@ export default class AwsServices {
       } catch (error) {
         console.log(error);
       }
-    });
+    }
   }
 }
