@@ -1,0 +1,16 @@
+spring:
+  # PostgreSQL Datasource Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5433/forex-pro
+    username: postgres
+    password: postgres
+
+  application:
+    name: ForexPro
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 3001
