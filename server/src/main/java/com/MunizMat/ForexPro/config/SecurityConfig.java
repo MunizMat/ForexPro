@@ -26,7 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**", "/users/**").permitAll()
+                        .requestMatchers("/auth/**", "/trades/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .cors(httpSecurityCorsConfigurer -> {
