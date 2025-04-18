@@ -1,13 +1,16 @@
 package com.MunizMat.ForexPro.services.impl;
 
 import com.MunizMat.ForexPro.dtos.CreateTradeDTO;
+import com.MunizMat.ForexPro.dtos.RegisterTradeResponseDTO;
 import com.MunizMat.ForexPro.entities.Trade;
 import com.MunizMat.ForexPro.entities.User;
 import com.MunizMat.ForexPro.repositories.TradeRepository;
 import com.MunizMat.ForexPro.repositories.UserRepository;
 import com.MunizMat.ForexPro.services.TradeService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -21,7 +24,7 @@ public class TradeServiceImpl implements TradeService {
     }
 
     @Override
-    public CompletableFuture<Trade> registerTrade(CreateTradeDTO createTradeDTO) {
+    public CompletableFuture<RegisterTradeResponseDTO> registerTrade(CreateTradeDTO createTradeDTO) {
         return CompletableFuture.supplyAsync(() -> {
             Trade trade = new Trade();
             User user = userRepository.findById(createTradeDTO.userId()).orElseThrow(() -> new RuntimeException("User not found"));
@@ -34,12 +37,19 @@ public class TradeServiceImpl implements TradeService {
             user.updateAccountBalance(trade);
             trade.setUser(user);
 
-            return saveNewTrade(trade).join();
+
+            trade = saveNewTrade(trade);
+            List<Trade> trades = tradeRepository.findAllByUserId((long) user.getId());
+
+            user.setTrades(trades);
+
+            return new RegisterTradeResponseDTO(user, trade);
         });
     }
 
-    private CompletableFuture<Trade> saveNewTrade(Trade trade){
+    @Transactional
+    private Trade saveNewTrade(Trade trade){
         userRepository.save(trade.getUser());
-         return CompletableFuture.supplyAsync(() -> tradeRepository.save(trade));
+        return tradeRepository.save(trade);
     }
 }

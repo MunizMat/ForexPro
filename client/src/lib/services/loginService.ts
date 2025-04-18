@@ -12,7 +12,11 @@ const loginService = async (
   dict: IDictionary
 ) => {
   const response: LoginResponseType = await toast.promise(
-    api.post('/auth', credentials),
+    api.get('/auth', {
+      params: {
+        ...credentials,
+      },
+    }),
     {
       pending: dict.toasts.pending.login,
       success: dict.toasts.success.login,

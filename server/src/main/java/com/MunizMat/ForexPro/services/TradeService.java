@@ -1,10 +1,10 @@
 package com.MunizMat.ForexPro.services;
 
 import com.MunizMat.ForexPro.dtos.CreateTradeDTO;
-import com.MunizMat.ForexPro.entities.Trade;
+import com.MunizMat.ForexPro.dtos.RegisterTradeResponseDTO;
 
 import java.util.concurrent.CompletableFuture;
 
 public interface TradeService {
-    CompletableFuture<Trade> registerTrade(CreateTradeDTO createTradeDTO);
+    CompletableFuture<RegisterTradeResponseDTO> registerTrade(CreateTradeDTO createTradeDTO);
 }

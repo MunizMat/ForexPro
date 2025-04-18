@@ -47,7 +47,7 @@ export const AuthProvider: FC<Props> = ({ children, locale, dict }) => {
       return;
     }
 
-    router.push(`${locale}/login`);
+    router.push('login');
   };
 
   return (

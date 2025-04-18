@@ -1,6 +1,7 @@
 package com.MunizMat.ForexPro.controllers;
 
 import com.MunizMat.ForexPro.dtos.CreateTradeDTO;
+import com.MunizMat.ForexPro.dtos.RegisterTradeResponseDTO;
 import com.MunizMat.ForexPro.entities.Trade;
 import com.MunizMat.ForexPro.services.TradeService;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class TradeController {
     }
 
     @PostMapping
-    public CompletableFuture<ResponseEntity<Trade>> registerTrade(@RequestBody CreateTradeDTO createTradeDTO) {
+    public CompletableFuture<ResponseEntity<RegisterTradeResponseDTO>> registerTrade(@RequestBody CreateTradeDTO createTradeDTO) {
         return tradeService.registerTrade(createTradeDTO).thenApply(ResponseEntity::ok)
                 .exceptionally((ex) -> ResponseEntity.status(500).body(null));
 
