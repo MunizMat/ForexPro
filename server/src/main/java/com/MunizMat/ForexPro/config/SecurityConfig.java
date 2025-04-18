@@ -26,11 +26,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**", "/trades/**").permitAll()
+                        .requestMatchers("/auth/**", "/trades/**", "/rates/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .cors(httpSecurityCorsConfigurer -> {
                     CorsConfiguration configuration = new CorsConfiguration();
+                    configuration.addExposedHeader("WWW-Authenticate");
                     configuration.setAllowedOrigins(List.of("*"));
                     configuration.setAllowedMethods(List.of("*"));
                     configuration.setAllowedHeaders(List.of("*"));

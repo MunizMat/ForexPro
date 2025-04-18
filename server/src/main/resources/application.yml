@@ -9,8 +9,12 @@ spring:
     name: ForexPro
 
   jpa:
+    show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
 
 server:
   port: 3001
@@ -18,3 +22,6 @@ server:
 jwt:
   secret: ${JWT_SECRET}
   expiration: 3600000 # 1 Hour
+
+forex-api:
+  url: wss://quote.alltick.io/quote-b-ws-api

@@ -4,7 +4,8 @@ import com.MunizMat.ForexPro.utils.TradeUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +29,10 @@ public class User {
 
     @JsonProperty
     private double accountBalanceUSD = 5000.0;
+
+    @JsonProperty
+    @Transient
+    private List<Trade> trades;
 
     public void updateAccountBalance(Trade trade){
         TradeUtils.Amounts amounts = new TradeUtils(trade).getAmounts();
