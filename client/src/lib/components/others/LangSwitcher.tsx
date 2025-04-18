@@ -14,12 +14,18 @@ const LanguageSwitcher = ({ locale }: { locale: Locale }) => {
     segments[1] = locale;
     return segments.join('/');
   };
+  const country = locale.split('-')[1];
 
   return (
     <NavDropdown
       style={{ maxHeight: '30px' }}
       className="mr-6 text-white  rounded-md d-flex  justify-content-center"
-      title={<LangItem locale={locale} />}
+      title={
+        <span
+          style={{ width: '2.5rem', lineHeight: '1.3rem' }}
+          className={`fi fi-${country.toLowerCase()}`}
+        ></span>
+      }
       id="language-switcher"
     >
       {i18n.locales.map((locale) => (

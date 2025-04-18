@@ -48,7 +48,13 @@ function SignUpForm({ dict }: IFormProps) {
       <h1 className="display-5">{dict.signup.title}</h1>
       <small>
         {dict.signup.alreadyHaveAccount}{' '}
-        <Link href="/login">{dict.signup.clickHere}</Link> {dict.signup.toLogin}
+        <Link
+          style={{ color: 'blue', textDecoration: 'underline' }}
+          href="/login"
+        >
+          {dict.signup.clickHere}
+        </Link>{' '}
+        {dict.signup.toLogin}
       </small>
       <Field
         controlId="name"
