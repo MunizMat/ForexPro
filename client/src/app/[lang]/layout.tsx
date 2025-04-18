@@ -7,9 +7,9 @@ import { AuthProvider } from 'src/lib/providers/AuthProvider';
 import { getDictionary } from 'src/lib/i18n/getDictionary';
 import { ReactNode } from 'react';
 import { Locale, i18n } from 'src/lib/i18n/config';
-import ClientToastContainer from 'src/lib/components/others/ClientToastContainer';
 import ClientSSRProvider from 'src/lib/components/others/ClientSSRProvider';
 import { Metadata } from 'next';
+import { ToastContainer } from 'react-toastify';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -36,7 +36,7 @@ export default async function RootLayout({
       <body>
         <ClientSSRProvider>
           <AuthProvider dict={dict} locale={params.lang}>
-            <ClientToastContainer />
+            <ToastContainer autoClose={5000} pauseOnHover={false} />
             <Navbar lang={params.lang} dict={dict} />
             <div className="root flex flex-col justify-center align-center ">
               {children}

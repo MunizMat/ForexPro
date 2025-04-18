@@ -1,12 +1,17 @@
 import api from '../config/axios';
-import { handleError } from '../utils/handleError';
+// import { handleError } from '../utils/handleError';
 import { toast } from 'react-toastify';
 import { AxiosResponse } from 'axios';
-import { ITradeCreation } from '../interfaces/ITrade';
+import { ITrade, ITradeCreation } from '../interfaces/ITrade';
 import { IUser } from '../interfaces/IUser';
 import { IDictionary } from '../interfaces/IDictionary';
 
-export type TradeResponse = AxiosResponse<{ user: IUser }>;
+interface TradeCompletedData {
+  updatedUser: IUser;
+  newTrade: ITrade;
+}
+
+export type TradeResponse = AxiosResponse<TradeCompletedData>;
 
 export const saveTrade = async (
   user: IUser,
@@ -14,28 +19,24 @@ export const saveTrade = async (
   newTrade: ITradeCreation,
   dict: IDictionary
 ) => {
-  try {
-    const body = {
-      user,
-      newTrade,
-    };
-    const response: TradeResponse = await toast.promise(
-      api.post(`/users/${user.id}/trade`, body, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      }),
-      {
-        pending: dict.toasts.pending.trade,
-        success: dict.toasts.success.tradeProcessing,
-        error: dict.toasts.error.trade,
-      }
-    );
+  const body = {
+    ...newTrade,
+    userId: user.id,
+  };
+  const response: TradeResponse = await toast.promise(
+    api.post('/trades', body, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    }),
+    {
+      pending: dict.toasts.pending.trade,
+      // success: dict.toasts.success.tradeProcessing,
+      error: dict.toasts.error.trade,
+    }
+  );
 
-    return response.data;
-  } catch (error) {
-    return handleError(error);
-  }
+  return response.data;
 };
 
 export default saveTrade;

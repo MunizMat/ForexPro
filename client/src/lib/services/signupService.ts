@@ -9,7 +9,7 @@ export type SignupResponse = AxiosResponse<Omit<IUser, 'trades'>>;
 
 const signupService = async (userData: IUserCreation, dict: IDictionary) => {
   const response: SignupResponse = await toast.promise(
-    api.post('/users', userData),
+    api.post('/auth', userData),
     {
       pending: dict.toasts.pending.signup,
       success: dict.toasts.success.signup,

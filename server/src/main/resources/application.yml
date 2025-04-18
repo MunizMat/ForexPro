@@ -1,0 +1,27 @@
+spring:
+  # PostgreSQL Datasource Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5433/forex-pro
+    username: postgres
+    password: postgres
+
+  application:
+    name: ForexPro
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 3001
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 3600000 # 1 Hour
+
+forex-api:
+  url: wss://quote.alltick.io/quote-b-ws-api
