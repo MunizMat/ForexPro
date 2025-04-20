@@ -47,7 +47,12 @@ export default function LoginForm({ dict }: IFormProps) {
       <h1 className="display-5">{dict.login.title}</h1>
       <small>
         {dict.login.dontHaveAccount}{' '}
-        <Link href="/signup">{dict.login.clickHere}</Link>{' '}
+        <Link
+          style={{ color: 'blue', textDecoration: 'underline' }}
+          href="/signup"
+        >
+          {dict.login.clickHere}
+        </Link>{' '}
         {dict.login.toCreateAccount}
       </small>
       <Field

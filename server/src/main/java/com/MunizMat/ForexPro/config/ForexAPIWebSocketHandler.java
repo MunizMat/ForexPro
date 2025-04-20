@@ -56,7 +56,7 @@ public class ForexAPIWebSocketHandler extends TextWebSocketHandler {
             ForexAPIWebSocketMessage wsMessage = objectMapper.readerFor(ForexAPIWebSocketMessage.class).readValue(payload);
 
             if (Objects.requireNonNull(wsMessage.getEvent()) == ForexAPIWebSocketEventType.GET_RATES_RESPONSE) {
-                ServerWebSocketHandler.connectedClients.forEach((client) -> {
+                ServerWebSocketHandler.connectedClients.forEach((id, client) -> {
                     sendExchangeRatesToConnectedClient(wsMessage, client);
                 });
             }
