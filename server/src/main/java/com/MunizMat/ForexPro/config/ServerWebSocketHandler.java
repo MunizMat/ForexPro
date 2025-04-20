@@ -12,13 +12,13 @@ import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 public class ServerWebSocketHandler extends TextWebSocketHandler {
-    public static final Set<WebSocketSession> connectedClients = new HashSet<>();
+    public static final Map<String, WebSocketSession> connectedClients = new HashMap();
     private static final Logger logger = LoggerFactory.getLogger(ServerWebSocketHandler.class);
     private final AtomicReference<WebSocketSession> sessionRef = new AtomicReference<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -57,7 +57,7 @@ public class ServerWebSocketHandler extends TextWebSocketHandler {
         if(connectedClients.isEmpty())
             connectToForexService();
 
-        connectedClients.add(session);
+        connectedClients.put(session.getId(), session);
 
         sessionRef.set(session);
     }
@@ -71,6 +71,6 @@ public class ServerWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         sessionRef.compareAndSet(session, null);
-        connectedClients.remove(session);
+        connectedClients.remove(session.getId());
     }
 }

@@ -1,32 +1,31 @@
-version: '3'
 services:
-  web:
-    container_name: "web"
-    build: 
-      context: ./client
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3000"
-    depends_on:
-      - api
-    volumes:
-      - ./client:/app
-      - /app/node_modules
-      - /app/.next
-  api:
-    container_name: "api"
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - redis
-      - postgres
-    volumes:
-      - ./server/src:/app/src
-    stdin_open: true 
-    tty: true
+  # web:
+  #   container_name: "web"
+  #   build: 
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3001:3000"
+  #   depends_on:
+  #     - api
+  #   volumes:
+  #     - ./client:/app
+  #     - /app/node_modules
+  #     - /app/.next
+  # api:
+  #   container_name: "api"
+  #   build: 
+  #     context: ./server
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - redis
+  #     - postgres
+  #   volumes:
+  #     - ./server/src:/app/src
+  #   stdin_open: true 
+  #   tty: true
   postgres:
     container_name: postgres
     image: postgres:alpine
@@ -39,15 +38,19 @@ services:
       POSTGRES_DB: forex-pro
     volumes:
       - postgresDB:/var/lib/postgresql/data
-  redis:
-    container_name: "redis"
-    restart: always
-    image: "redis:alpine"
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbit_mq 
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     volumes:
-      - redisDB:/data
+      - rabbitmq_data:/var/lib/rabbitmq
+
 volumes:
   postgresDB:
-  redisDB:
+  rabbitmq_data:
 
 
 

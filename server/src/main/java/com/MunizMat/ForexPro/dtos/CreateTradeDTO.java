@@ -7,6 +7,7 @@ public record CreateTradeDTO(
         String quoteCurrency,
         double exchangeRate,
         String currencyPair,
-        Long userId
+        Long userId,
+        String sessionId
         ) {
 }
