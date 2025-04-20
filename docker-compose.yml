@@ -1,31 +1,29 @@
 services:
-  # web:
-  #   container_name: "web"
-  #   build: 
-  #     context: ./client
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3001:3000"
-  #   depends_on:
-  #     - api
-  #   volumes:
-  #     - ./client:/app
-  #     - /app/node_modules
-  #     - /app/.next
-  # api:
-  #   container_name: "api"
-  #   build: 
-  #     context: ./server
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - redis
-  #     - postgres
-  #   volumes:
-  #     - ./server/src:/app/src
-  #   stdin_open: true 
-  #   tty: true
+  web:
+    container_name: "web"
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+      - /app/.next
+  api:
+    container_name: "api"
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
+      - postgres
+    env_file:
+      - ./server/.env
   postgres:
     container_name: postgres
     image: postgres:alpine
