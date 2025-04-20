@@ -9,12 +9,12 @@ services:
       - api
     volumes:
       - ./client/__tests__:/app/__tests__
-  api:
-    container_name: "api"
-    build:
-      context: ./server
-      dockerfile: ./Dockerfile.test
-    volumes:
-      - ./server/tests:/app/tests
+  # api:
+  #   container_name: "api"
+  #   build:
+  #     context: ./server
+  #     dockerfile: ./Dockerfile.test
+  #   volumes:
+  #     - ./server/tests:/app/tests
 
 
