@@ -12,6 +12,7 @@ import lombok.Data;
         @JsonSubTypes.Type(value = SendRatesMessage.class, name = "sendRates"),
         @JsonSubTypes.Type(value = UserIDMessage.class, name = "userId"),
         @JsonSubTypes.Type(value = TradeCompletedMessage.class, name = "tradeCompleted"),
+        @JsonSubTypes.Type(value = SessionIDMessage.class, name = "sessionId"),
 })
 @Data
 public abstract class WebSocketMessage<T> {

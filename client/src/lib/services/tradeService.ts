@@ -17,11 +17,13 @@ export const saveTrade = async (
   user: IUser,
   userToken: string,
   newTrade: ITradeCreation,
-  dict: IDictionary
+  dict: IDictionary,
+  sessionId: string
 ) => {
   const body = {
     ...newTrade,
     userId: user.id,
+    sessionId,
   };
   const response: TradeResponse = await toast.promise(
     api.post('/trades', body, {

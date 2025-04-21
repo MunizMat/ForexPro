@@ -12,6 +12,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -28,6 +29,13 @@ public class ForexAPIWebSocketHandler extends TextWebSocketHandler {
         } catch (Exception e) {
             logger.error("Failed to get exchange rates from Forex rates API: {}", e.getMessage());
         }
+    }
+
+    public void disconnect() throws IOException  {
+        WebSocketSession session = sessionRef.get();
+
+        if(session != null)
+            session.close();
     }
 
     private void sendExchangeRatesToConnectedClient(ForexAPIWebSocketMessage message, WebSocketSession client){

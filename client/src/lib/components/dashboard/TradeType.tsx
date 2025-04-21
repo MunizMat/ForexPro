@@ -7,6 +7,7 @@ const TradeType: React.FC<TradeTypeProps> = ({
   i18nData,
   tradeData,
   updatedAt,
+  sessionId,
 }) => {
   const { baseCurrency, exchangeRate, tradeType, currencyPair } = tradeData;
   const { dict, locale } = i18nData;
@@ -45,7 +46,7 @@ const TradeType: React.FC<TradeTypeProps> = ({
           <InputGroup.Text>{baseCurrency}</InputGroup.Text>
         </InputGroup>
         <Button
-          onClick={() => handleTrade(tradeData)}
+          onClick={() => handleTrade(tradeData, sessionId)}
           className="w-100 mt-4"
           size="lg"
           variant={getButtonColor()}

@@ -13,4 +13,5 @@ export interface TradeTypeProps {
     currencyPair: string;
   };
   updatedAt: Date;
+  sessionId: string;
 }

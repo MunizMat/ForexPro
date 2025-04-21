@@ -25,6 +25,7 @@ type UserIdData = string | number;
 export const useSocket = (currencyPair: string, dict: IDictionary) => {
   const [data, setData] = useState<IDashboardServerResponse | null>(null);
   const { setAuthState, authState } = useContext(AuthContext);
+  const [sessionId, setSessionId] = useState<string>('');
 
   const ws = useRef<WebSocket | null>(null);
 
@@ -53,7 +54,7 @@ export const useSocket = (currencyPair: string, dict: IDictionary) => {
       return;
     }
 
-    const socketUrl = `ws://${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/rates`;
+    const socketUrl = `wss://${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/rates`;
     ws.current = new WebSocket(socketUrl);
     const currentWs = ws.current;
 
@@ -78,6 +79,12 @@ export const useSocket = (currencyPair: string, dict: IDictionary) => {
           'data' in parsedMessage
         ) {
           switch (parsedMessage.event) {
+            case 'sessionId': {
+              const { sessionId } = parsedMessage.data;
+              setSessionId(sessionId);
+              break;
+            }
+
             case 'tradeCompleted': {
               const { updatedUser, newTrade } =
                 parsedMessage.data as TradeCompletedData;
@@ -167,7 +174,7 @@ export const useSocket = (currencyPair: string, dict: IDictionary) => {
     };
   }, [authState.user?.id, currencyPair, dict, setAuthState, sendMessage]);
 
-  return { data };
+  return { data, sessionId };
 };
 
 export default useSocket;

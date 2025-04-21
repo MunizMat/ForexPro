@@ -1,5 +1,6 @@
 package com.MunizMat.ForexPro.config;
 
+import com.MunizMat.ForexPro.messages.server.SessionIDMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,8 +59,9 @@ public class ServerWebSocketHandler extends TextWebSocketHandler {
             connectToForexService();
 
         connectedClients.put(session.getId(), session);
-
         sessionRef.set(session);
+
+        session.sendMessage(new TextMessage(objectMapper.writeValueAsString(new SessionIDMessage(new SessionIDMessage.Payload(session.getId())))));
     }
 
     @Override
@@ -72,5 +74,8 @@ public class ServerWebSocketHandler extends TextWebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         sessionRef.compareAndSet(session, null);
         connectedClients.remove(session.getId());
+
+        if(connectedClients.isEmpty())
+            forexAPIWebSocketHandler.disconnect();
     }
 }

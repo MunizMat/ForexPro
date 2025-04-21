@@ -13,7 +13,7 @@ const Trade: FC<ITradeProps> = ({
   dict,
   locale,
 }) => {
-  const { data } = useSocket(currencyPair, dict);
+  const { data, sessionId } = useSocket(currencyPair, dict);
 
   const tradeData: Omit<ITradeCreation, 'amount'> = {
     baseCurrency,
@@ -32,6 +32,7 @@ const Trade: FC<ITradeProps> = ({
             i18nData={i18nData}
             tradeData={tradeData}
             updatedAt={data.updatedAt}
+            sessionId={sessionId}
           />
           <TradeType
             i18nData={i18nData}
@@ -41,6 +42,7 @@ const Trade: FC<ITradeProps> = ({
               exchangeRate: data.bidPrice,
             }}
             updatedAt={data.updatedAt}
+            sessionId={sessionId}
           />
         </>
       ) : (

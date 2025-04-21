@@ -14,7 +14,10 @@ const useTrade = (currencyPair: string, dict: IDictionary) => {
 
   const [amount, setAmount] = useState('');
 
-  const handleTrade = async (tradeData: Omit<ITradeCreation, 'amount'>) => {
+  const handleTrade = async (
+    tradeData: Omit<ITradeCreation, 'amount'>,
+    sessionId: string
+  ) => {
     const accountBalance =
       tradeData.baseCurrency === 'GBP'
         ? user.accountBalanceGBP
@@ -30,7 +33,7 @@ const useTrade = (currencyPair: string, dict: IDictionary) => {
       exchangeRate: tradeData.exchangeRate,
     };
 
-    await saveTrade(user, token, trade, dict);
+    await saveTrade(user, token, trade, dict, sessionId);
   };
 
   return { handleTrade, setAmount };
