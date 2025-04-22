@@ -45,7 +45,7 @@ public class ContextConfiguration {
 
             return tradeService.registerTrade(createTradeDTO)
                     .thenApply(trade -> {
-                        WebSocketSession session = ServerWebSocketHandler.connectedClients.get(createTradeDTO.sessionId());
+                        WebSocketSession session = ServerWebSocketHandler.connectedClients.get(createTradeDTO.getSessionId());
 
                         if(session == null)
                             throw new RuntimeException("Session not found");

@@ -2,7 +2,9 @@
     "home": {
       "title": "ForexPro",
       "subtitle": "Potencialize sua jornada de negociação de moeda estrangeira com dados em tempo real e uma experiência de usuário perfeita",
-      "buttonText": "Comece a negociar hoje"
+      "buttonText": "Crie sua conta",
+      "or": "ou",
+      "demoAccountButtonText": "Entre com uma conta demo"
     },
     "navbar": {
         "logout": "Sair",
@@ -17,7 +19,7 @@
         "confirmPassword": "Confirmar senha"
     },
     "signup": {
-        "title": "Cadastre-se gratuitamente",
+        "title": "Cadastre-se",
         "alreadyHaveAccount": "Já possui uma conta?",
         "clickHere": "Clique aqui",
         "toLogin": "para fazer login",

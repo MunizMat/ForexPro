@@ -1,4 +1,5 @@
 'use client';
+
 import { FormEvent, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,9 +13,11 @@ import useFormValidation from '../../hooks/useFormValidation';
 import { ISignUpFields } from '../../interfaces/ISignUpFields';
 import getSignupSchema from '../../validations/signUpSchema';
 import { AuthContext } from '../../contexts/AuthContext';
+import { useAPIHealthCheck } from 'src/lib/hooks/useAPIHealthCheck';
 
 function SignUpForm({ dict }: IFormProps) {
   const { signup } = useContext(AuthContext);
+  useAPIHealthCheck();
   //    Custom hooks
   const { errors, validateForm } = useFormValidation<ISignUpFields>(
     dict,

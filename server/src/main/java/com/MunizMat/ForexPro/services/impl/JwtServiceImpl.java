@@ -39,12 +39,12 @@ public class JwtServiceImpl implements JwtService {
                 .setSubject(subject)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .signWith(getSigningKey())
                 .compact();
     }
 
     private Key getSigningKey() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
     public String extractUserId(String token) {
@@ -63,6 +63,11 @@ public class JwtServiceImpl implements JwtService {
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
+    }
+
+    @Override
+    public boolean isTokenValid(String token) {
+        return !isTokenExpired(token);
     }
 
 

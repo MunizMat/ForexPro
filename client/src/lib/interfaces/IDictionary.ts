@@ -54,7 +54,9 @@ export interface FormLabels {
 export interface Home {
   title: string;
   subtitle: string;
+  or: string;
   buttonText: string;
+  demoAccountButtonText: string;
 }
 
 export interface Login {

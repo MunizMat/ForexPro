@@ -38,16 +38,33 @@ public class AuthServiceAsyncImpl implements AuthServiceAsync {
         User user = userRepository.findByEmail(loginDTO.email())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
 
-        if(!passwordEncoder.matches(loginDTO.password(), user.getPassword()))
+        if(!passwordEncoder.matches(loginDTO.password(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
+        }
+
+        List<Trade> trades = tradeRepository.findAllByUserId((long) user.getId());
+
+        user.setTrades(trades);
+
+        String token = this.jwtService.generateToken(String.valueOf(user.getId()));
+
+        return new LoginResponseDTO(user, token);
+        });
+    }
+
+    @Override
+    public CompletableFuture<LoginResponseDTO> loginDemoAccount() {
+        return CompletableFuture.supplyAsync(() -> {
+            User user = userRepository.findByEmail("demo@example.com")
+                    .orElseThrow(() -> new RuntimeException("Demo account not found"));
 
             List<Trade> trades = tradeRepository.findAllByUserId((long) user.getId());
 
             user.setTrades(trades);
 
-        String token = this.jwtService.generateToken(String.valueOf(user.getId()));
+            String token = this.jwtService.generateToken(String.valueOf(user.getId()));
 
-        return new LoginResponseDTO(user, token);
+            return new LoginResponseDTO(user, token);
         });
     }
 }

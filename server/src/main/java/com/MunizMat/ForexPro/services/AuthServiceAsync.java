@@ -7,4 +7,5 @@ import java.util.concurrent.CompletableFuture;
 
 public interface AuthServiceAsync {
     CompletableFuture<LoginResponseDTO> login(LoginDTO loginDTO);
+    CompletableFuture<LoginResponseDTO> loginDemoAccount();
 }

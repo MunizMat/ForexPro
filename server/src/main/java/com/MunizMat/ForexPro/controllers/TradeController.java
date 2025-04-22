@@ -1,5 +1,6 @@
 package com.MunizMat.ForexPro.controllers;
 
+import com.MunizMat.ForexPro.authentication.CustomUserDetails;
 import com.MunizMat.ForexPro.config.AmqpAsyncConfig;
 import com.MunizMat.ForexPro.dtos.CreateTradeDTO;
 import com.MunizMat.ForexPro.records.GenericHTTPResponse;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +26,11 @@ public class TradeController {
     }
 
     @PostMapping
-    public ResponseEntity<GenericHTTPResponse> registerTrade(@RequestBody CreateTradeDTO createTradeDTO) {
+    public ResponseEntity<GenericHTTPResponse> registerTrade(
+            @RequestBody CreateTradeDTO createTradeDTO,
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
         try {
+            createTradeDTO.setUserId(Long.parseLong(userDetails.getUsername()));
             String json = new ObjectMapper().writeValueAsString(createTradeDTO);
             messageChannel.send(new GenericMessage<>(json));
 

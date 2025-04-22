@@ -27,13 +27,13 @@ public class TradeServiceImpl implements TradeService {
     public CompletableFuture<RegisterTradeResponseDTO> registerTrade(CreateTradeDTO createTradeDTO) {
         return CompletableFuture.supplyAsync(() -> {
             Trade trade = new Trade();
-            User user = userRepository.findById(createTradeDTO.userId()).orElseThrow(() -> new RuntimeException("User not found"));
+            User user = userRepository.findById(createTradeDTO.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
 
-            trade.setTradeType(createTradeDTO.tradeType());
-            trade.setAmount(createTradeDTO.amount());
-            trade.setBaseCurrency(createTradeDTO.baseCurrency());
-            trade.setExchangeRate(createTradeDTO.exchangeRate());
-            trade.setCurrencyPair(createTradeDTO.currencyPair());
+            trade.setTradeType(createTradeDTO.getTradeType());
+            trade.setAmount(createTradeDTO.getAmount());
+            trade.setBaseCurrency(createTradeDTO.getBaseCurrency());
+            trade.setExchangeRate(createTradeDTO.getExchangeRate());
+            trade.setCurrencyPair(createTradeDTO.getCurrencyPair());
             user.updateAccountBalance(trade);
             trade.setUser(user);
 

@@ -13,9 +13,11 @@ import useField from '../../hooks/useField';
 import useFormValidation from '../../hooks/useFormValidation';
 import { ILoginCredentials } from '../../interfaces/IUser';
 import getLoginSchema from '../../validations/loginSchema';
+import { useAPIHealthCheck } from 'src/lib/hooks/useAPIHealthCheck';
 
 export default function LoginForm({ dict }: IFormProps) {
   const { login } = useContext(AuthContext);
+  useAPIHealthCheck();
   //    Custom hooks
   const { errors, validateForm } = useFormValidation<ILoginCredentials>(
     dict,

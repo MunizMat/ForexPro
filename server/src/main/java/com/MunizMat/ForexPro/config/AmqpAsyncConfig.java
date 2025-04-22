@@ -1,6 +1,7 @@
 package com.MunizMat.ForexPro.config;
 
 import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.SimpleRoutingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -18,7 +19,8 @@ public class AmqpAsyncConfig {
 
     @Bean
     public SimpleMessageListenerContainer replyContainer() {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(new SimpleRoutingConnectionFactory());
+        ConnectionFactory connectionFactory = new SimpleRoutingConnectionFactory();
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
         container.setQueueNames("trades");
         return container;
     }

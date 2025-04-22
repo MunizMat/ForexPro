@@ -2,7 +2,9 @@
     "home": {
       "title": "ForexPro",
       "subtitle": "Empower Your Forex Trading Journey with Real-Time Data and Seamless User Experience",
-      "buttonText": "Start trading today"
+      "buttonText": "Create your account",
+      "or": "or",
+      "demoAccountButtonText": "Sign in with a demo account"
     }, 
     "navbar": {
         "logout": "Logout",
@@ -16,7 +18,7 @@
         "confirmPassword": "Confirm password"
     },
     "signup": {
-        "title": "Sign Up for Free",
+        "title": "Sign Up",
         "alreadyHaveAccount": "Already have an account?",
         "clickHere": "Click here",
         "toLogin": "to login",
