@@ -13,9 +13,7 @@ export default function TableBody({ locale, dict }: Props) {
   const { user } = useContext(AuthContext).authState;
 
   const formattedTrades = user
-    ? new TradeHistory(user.trades)
-        .formatDate(locale, dict.other.timezone)
-        .translate(dict)
+    ? new TradeHistory(user.trades).formatDate(locale).translate(dict)
     : null;
 
   return (

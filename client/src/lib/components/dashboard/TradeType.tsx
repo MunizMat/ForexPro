@@ -27,8 +27,7 @@ const TradeType: React.FC<TradeTypeProps> = ({
   const getUpdatedAt = () => {
     return `${dict.dashboard.trade.updatedAt} ${formatDate(
       new Date(updatedAt),
-      locale,
-      dict.other.timezone
+      locale
     )}`;
   };
 

@@ -6,6 +6,8 @@ const mockDict: IDictionary = {
     subtitle:
       'Empower Your Forex Trading Journey with Real-Time Data and Seamless User Experience',
     buttonText: 'Start trading today',
+    demoAccountButtonText: '',
+    or: '',
   },
   navbar: {
     logout: 'Logout',

@@ -8,11 +8,11 @@ export default class TradeHistory {
     this.trades = trades;
   }
 
-  formatDate(locale: Locale, timezone: string) {
+  formatDate(locale: Locale) {
     this.trades = this.trades.map((trade) => {
       return {
         ...trade,
-        createdAt: dateFormatter(new Date(trade.createdAt), locale, timezone),
+        createdAt: dateFormatter(new Date(trade.createdAt), locale),
       };
     });
     return this;
