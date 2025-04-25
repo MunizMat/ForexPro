@@ -9,58 +9,13 @@ https://github.com/user-attachments/assets/ca95b5db-b168-42a0-bd93-aa8f7a567885
 ForexPro is a foreign exchange web application for performing mock (simulated) trades for the GBP/USD and USD/GBP currency pairs, using real-time data for the exchange rates of each of them. The application provides a dashboard where users can select a currency pair, insert a desired amount for buy or sell, and execute the mock trade. Each user starts with a default account balance of $5000 and £5000 and each user has a trade history listing all their past trades. 
 
 ## Table of Contents
+- [Live Demo](#live-demo)
 - [Technologies](#technologies)
-- [Getting Started](#getting-started)
 - [Features](#features)
-- [Testing](#testing)
+- [Pending Improvements](#pending-improvements)
 
-## Getting Started
-
-### Prerequisites
-To install and run the project on your local machine you will need to:
-1. Install [Docker](https://www.docker.com/) on your local machine 
-
-
-2. Create an account on [AllTick](https://alltick.co/en-US) and generate an API token for free.
-
-
-### Installation
-1. Clone this repository to your local machine:
-```shell 
-git clone https://github.com/MunizMat/ForexPro.git
-```
-
-2. Navigate to the 'server' directory:
-```shell 
-cd ForexPro/server
-```
-
-3. Create a .env file:
-```shell 
-nano .env
-```
-
-Paste the following: 
-
-```shell 
-JWT_SECRET=<YOUR_JWT_SECRET>
-FOREX_API_TOKEN=<YOUR_ALLTICK_API_TOKEN>
-```
-
-4. Navigate back to the project directory:
-```shell 
-cd ..
-```
- 
-5. Build the docker images:
-```shell 
-docker compose build
-```
-
-6. Run the docker containers:
-```shell 
-docker compose up
-```
+## Live Demo
+A live demo of this project is publically accessible at https://forex-pro-six.vercel.app/en-US
 
 ## Technologies
 - Java
@@ -81,17 +36,7 @@ docker compose up
 - Dashboard for mock trading
 - Trade History
 
-## Testing 
-- [Using Docker](#using-docker-1)
-
-
-## Using Docker
-In the root directory of the project, run the following commands:
-
-```shell 
-docker-compose -f docker-compose.test.yml build
-docker-compose -f docker-compose.test.yml up
-```
-
-
-
+## Pending Improvements
+While functional, this project still has pending improvements to be addressed / implemented:
+- Unit testing
+- Optimisation of DB queries
