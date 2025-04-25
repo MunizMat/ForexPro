@@ -26,13 +26,13 @@ export const HomePage: FC<HomePageProps> = ({ dict }) => {
             </Link>
           </button>
 
-          <span className="uppercase">{dict.home.or}</span>
+          {/* <span className="uppercase">{dict.home.or}</span>
 
           <button className="bg-blue-700/20 hover:bg-blue-800/70 text-white max-w-[270px] py-2 px-6 rounded-md text-md transition-all duration-300">
             <Link href="/signup" className="text-white no-underline">
               {dict.home.demoAccountButtonText}
             </Link>
-          </button>
+          </button> */}
         </div>
       </div>
       <Image
