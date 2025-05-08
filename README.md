@@ -14,9 +14,6 @@ ForexPro is a foreign exchange web application for performing mock (simulated) t
 - [Features](#features)
 - [Pending Improvements](#pending-improvements)
 
-## Live Demo
-A live demo of this project is publically accessible at https://forex-pro-six.vercel.app/en-US
-
 ## Technologies
 - Java
 - Spring
