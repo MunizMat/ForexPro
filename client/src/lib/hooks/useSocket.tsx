@@ -54,7 +54,8 @@ export const useSocket = (currencyPair: string, dict: IDictionary) => {
       return;
     }
 
-    const socketUrl = `wss://${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/rates`;
+    const wsBaseURL = process.env.NEXT_PUBLIC_WS_URL;
+    const socketUrl = `${wsBaseURL}/rates`;
     ws.current = new WebSocket(socketUrl);
     const currentWs = ws.current;
 

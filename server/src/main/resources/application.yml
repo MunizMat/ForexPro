@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${PG_HOSTNAME}:5432/forexpro
-    username: ${PG_USER}
-    password: ${PG_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOSTNAME}:5432/forexpro
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
 
   rabbitmq:
     host: ${RABBIT_MQ_HOSTNAME}
