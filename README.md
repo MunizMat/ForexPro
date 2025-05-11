@@ -8,7 +8,7 @@
 
 > A simulated forex trading web app for GBP/USD and USD/GBP pairs using real-time rates, $5,000/£5,000 starter balances, and complete trade history tracking
 
-<video src="https://github.com/user-attachments/assets ca95b5db-b168-42a0-bd93-aa8f7a567885"></video>
+<video src="https://github.com/user-attachments/assets/ca95b5db-b168-42a0-bd93-aa8f7a567885"></video>
 
 ## Table of Contents
 
